@@ -5,12 +5,13 @@ module.exports = {
     getReserves: async (req, res) => {
 
         const reserves = await db.Reserve.findAll();
-        res.json({
-            meta: {
-                status: 200
-            },
-            data: reserves
-        });
+        res.send("HOLA PUTO MUNDO!")
+        // res.json({
+        //     meta: {
+        //         status: 200
+        //     },
+        //     data: reserves
+        // });
 
     },
 
