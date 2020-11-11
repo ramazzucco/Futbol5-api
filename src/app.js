@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(methodOverride('_method'));
 app.use(
   session({
+    cookie:{
+      secure: true,
+      maxAge:60000
+    },
     secret:'algo le tenemos que pasar',
     resave: false,
     saveUninitialized: true
