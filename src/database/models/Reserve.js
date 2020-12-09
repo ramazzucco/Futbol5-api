@@ -23,12 +23,16 @@ module.exports = (sequelize, DataTypes) => {
         telefono: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        fecha: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }
 
     const config = {
         tableName : 'reserve',
-        timestamps: false
+        timestamps: true
     }
 
     const Reserve = sequelize.define('Reserve',cols,config);

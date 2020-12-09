@@ -1,9 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const cors = require('cors');
 const methodOverride =  require('method-override');
 // const session = require ('express-session');
 require("dotenv").config();
@@ -11,6 +11,7 @@ require("dotenv").config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const apiRouter = require("./routes/api/reserves");
 
 const app = express();
 
@@ -35,19 +36,19 @@ app.use(methodOverride('_method'));
 //     saveUninitialized: true
 //   })
 // );
-
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// app.use(cors())
-// app.get('/api/dashboard', function (req, res, next) {
-//   res.json({msg: 'This is CORS-enabled for all origins!'})
-// })
+app.use(cors())
+app.get('http://localhost:3000/api', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
 
-// app.listen(80, function () {
-//   console.log('CORS-enabled web server listening on port 80')
-// })
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
 
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
