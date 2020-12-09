@@ -39,14 +39,14 @@ app.use(methodOverride('_method'));
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(cors())
-app.get(`https://api-futbol5.herokuapp.com/api`, function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})
+// app.use(cors())
+// app.get('http://localhost:3000/api', function (req, res, next) {
+//   res.json({msg: 'This is CORS-enabled for all origins!'})
+// })
 
-app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80')
-})
+// app.listen(80, function () {
+//   console.log('CORS-enabled web server listening on port 80')
+// })
 
 app.use('/api', apiRouter);
 
