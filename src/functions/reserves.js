@@ -2,8 +2,6 @@ let db = require("../database/models");
 
 module.exports = {
 
-    urlBase: "https://api-futbol5.herokuapp.com/",
-
     getCanchaYhorario: async () => {
         const cancha_1 = await db.Cancha_1.findAll();
         const cancha_2 = await db.Cancha_2.findAll();
