@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "futbol5",
-    "port": "3306",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_NAME,
+    "port": process.env.DB_PORT,
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
@@ -17,10 +17,10 @@ module.exports = {
     "operatorsAliases": false
   },
   "production": {
-    "username": "b608968b2f2ba2",
-    "password": "fb07e3a4",
-    "database": "heroku_c26957e453bd190",
-    "host": "us-cdbr-east-02.cleardb.com",
+    "username": process.env.DB_USER_PROD,
+    "password": process.env.DB_PASS_PROD,
+    "database": process.env.DB_NAME_PROD,
+    "host": process.env.DB_PORT_PROD,
     "dialect": "mysql",
     "operatorsAliases": 0
   }
