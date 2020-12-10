@@ -17,10 +17,10 @@ module.exports = {
     "operatorsAliases": false
   },
   "production": {
-    "username": process.env.DB_USER_PROD,
-    "password": process.env.DB_PASS_PROD,
-    "database": process.env.DB_NAME_PROD,
-    "host": "us-cdbr-east-02.cleardb.com",
+    "username": process.env.PROD_DB_USER,
+    "password": process.env.PROD_DB_PASS,
+    "database": process.env.PROD_DB_NAME,
+    "host": process.env.PROD_DB_HOST,
     "dialect": "mysql",
     "operatorsAliases": 0
   }
