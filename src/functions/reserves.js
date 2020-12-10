@@ -1,5 +1,5 @@
 let db = require("../database/models");
-require("dotenv").config();
+require("dotenv").load();
 
 
 module.exports = {
