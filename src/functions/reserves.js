@@ -1,4 +1,6 @@
 let db = require("../database/models");
+require("dotenv").config();
+
 
 module.exports = {
 
@@ -117,8 +119,6 @@ module.exports = {
 
         client.messages
             .create({
-                user:accountSid,
-                password: authToken,
                 body: newMesagge,
                 from: 'whatsapp:+14155238886',
                 to: `whatsapp:+549${data.telefono}`
