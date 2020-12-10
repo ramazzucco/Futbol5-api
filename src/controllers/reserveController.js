@@ -113,13 +113,15 @@ module.exports = {
         reserve.fecha = functions.getDate()
         const newReserve = await db.Reserve.create(reserve);
 
-            res.json( {
-                meta: {
-                    status: 200,
-                    msg: "La Reserva Fue Exitosa!"
-                },
-                data: newReserve,
-            });
+        functions.sendMesagge(req.body);
+
+        res.json( {
+            meta: {
+                status: 200,
+                msg: "La Reserva Fue Exitosa!"
+            },
+            data: newReserve,
+        });
 
     },
 

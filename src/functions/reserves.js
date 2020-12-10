@@ -108,4 +108,22 @@ module.exports = {
         return fecha;
     },
 
+    sendMesagge: (data) => {
+
+        const newMesagge = `Hola ${data.nombre} ${data.apellido}!,\n\nha reservado la cancha N° ${data.cancha} a las ${data.horario}.\n\nTiene 1hs para abonar la reserva, de lo contrario la misma será cancelada automaticamente por el sistema.`
+        const accountSid = process.env.TWILIO_ACCOUNT_SID;
+        const authToken = process.env.TWILIO_AUTH_TOKEN;
+        const client = require('twilio')(accountSid, authToken);
+
+        client.messages
+            .create({
+                body: newMesagge,
+                from: 'whatsapp:+14155238886',
+                to: `whatsapp:+549${data.telefono}`
+            })
+            .then(message => console.log(message.sid))
+            .done();
+
+    },
+
 };
