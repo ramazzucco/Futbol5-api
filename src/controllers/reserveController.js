@@ -113,8 +113,6 @@ module.exports = {
         reserve.fecha = functions.getDate()
         const newReserve = await db.Reserve.create(reserve);
 
-        functions.sendMesagge(req.body);
-
         res.json( {
             meta: {
                 status: 200,
