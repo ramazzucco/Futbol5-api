@@ -1,4 +1,5 @@
 let db = require("../database/models");
+const nodemailer = require("nodemailer");
 
 module.exports = {
 
@@ -110,8 +111,47 @@ module.exports = {
 
     sendMesagge: (data) => {
 
-        const newMesagge = `Hola ${data.nombre} ${data.apellido}!,\n\nha reservado la cancha N° ${data.cancha} a las ${data.horario}.\n\nTiene 1hs para abonar la reserva, de lo contrario la misma será cancelada automaticamente por el sistema.`
+        const newMessage = `<p>IMPORTANTE! : Tiene 1hs para abonar la reserva, de lo contrario la misma será cancelada automaticamente por el sistema.</p>
+        <hr>
+        <div style="background: rgb(0,200,0); margin-left: auto; margin-right: auto; width: 50%;margin-top: 10%;margin-bottom: 10%; box-shadow: 0 0 9px 7px black; border-radius: 25px; padding: 20px;">
+            <div style="border-bottom: 2px solid gray;">
+                <h4 style="display: inline; color: rgb(0,100,0); margin-right: 20%;">Tu Marca</h4><h4 style="display: inline-block; color: rgb(0,100,0); font-weight: bold;">La Reserva fue Exitosa!</h4>
+            </div>
+            <div style="padding: 20px;">
+                <h4 >${data.nombre} ${data.apellido}</h4>
+                <h4>Numero de Reserva: ${data.id}</h4>
+                <h4 style="text-align: center;">Ha Reservado la CANCHA N° ${data.cancha}, a las ${data.horario}.!</h4>
+            </div>
+        </div><hr>
+        <ul><li>Telefono: 4-331122</li><li>Direccion: Calle Falsa 123</li><li>Email: tumarca@gmail.com</li></ul>`
 
+        async function main(){
+
+            const transporter = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: "rsmazzucco@gmail.com",
+                    pass: "cakl jqmk qevs jkvd",
+                },
+            });
+
+            const info = await transporter.sendMail({
+                from: '"Reserva Exitosa" <rsmazzucco@gmail.com>',
+                to: `${data.email}`,
+                subject: "Reserva Exitosa!",
+                html: newMessage
+            });
+
+            console.log("Message sent: %s", info.messageId);
+
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+        }
+
+
+        main().catch(console.error);
     },
 
 };
