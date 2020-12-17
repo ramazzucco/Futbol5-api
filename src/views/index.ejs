@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>Login Admin</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+</head>
+
+<body class="bg-secondary">
+  <% if(access) { %>
+    <div class="card text-white bg-dark w-50">
+      <div class="card-header text-center h4">ADMIN (Crear contraseña)</div>
+      <div class="card-body p-3 text-center">
+        <form action="/admin/password?_method=PUT" method="POST">
+          <div class="form-group">
+            <label for="nombre" class="col-form-label-lg">Nombre</label>
+            <input type="text" name="name" class="form-control bg-secondary border-0 text-center w-50 mx-auto">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label-lg">Password</label>
+            <input type="password" name="password" class="form-control bg-secondary border-0 text-center w-50 mx-auto">
+          </div>
+          <% if(typeof error != "undefined") { %>
+          <div class="error">
+            <p><%= error %> </p>
+          </div>
+          <% } %>
+          <input type="submit" class="btn btn-outline-secondary mx-auto mt-3" value="ENVIAR">
+        </form>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="card text-white bg-dark w-50">
+      <div class="card-header text-center text-uppercase h4">Admin</div>
+      <div class="card-body p-3 text-center">
+        <form action="/admin/login" method="post">
+          <label for="password" class="col-form-label-lg text-uppercase">Ingrese su Password</label>
+          <input type="password" name="password" class="form-control bg-secondary border-0 text-center w-50 mx-auto">
+          <% if(typeof error != "undefined") { %>
+            <div class="error mt-3">
+              <p class="font-weight-bold h5"><%= error %></p>
+            </div>
+          <% } %>
+          <input type="submit" class="btn btn-outline-secondary mx-auto mt-3" value="INGRESAR">
+        </form>
+      </div>
+    </div>
+    <% } %>
+</body>
+<script src="/javascripts/all.js"></script>
 </html>

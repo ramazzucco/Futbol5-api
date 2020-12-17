@@ -4,6 +4,10 @@ const controllers = require("../../controllers/reserveController")
 
 router.get('/reserves', controllers.getReserves);
 
+router.get("/reserves/admin", controllers.admin);
+
+router.get("/reserves/history", controllers.sendReserveHistory);
+
 router.post("/reserves/modify", controllers.modifyReserve);
 
 router.post("/reserves/cancel", controllers.modifyReserve);

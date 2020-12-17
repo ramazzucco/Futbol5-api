@@ -1,5 +1,6 @@
 let db = require("../database/models");
 const functions = require("../functions/reserves");
+const functionsAdmin = require("../functions/admin");
 
 module.exports = {
 
@@ -17,7 +18,7 @@ module.exports = {
 
     getReservesByCanchaYhorario: async (req, res) => {
 
-        console.log(req.params.reserveId)
+        // console.log(req.params.reserveId)
         const reserve = await db.Reserve.findAll({
             where: {
                 id: Number(req.params.reserveId),
@@ -33,7 +34,7 @@ module.exports = {
     },
 
     modifyReserve: async (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         let modification = "";
 
         if(req.body.reservado === true || req.body.reservado === false){
@@ -45,7 +46,7 @@ module.exports = {
                 }
             })
             functions.modify(req.body.cancha, req.body.horario, false, req.body.reserveId);
-            console.log("Cancel: ",req.body.cancha, req.body.horario)
+            // console.log("Cancel: ",req.body.cancha, req.body.horario)
             modification = `Reserva N°${req.body.reserveId} Cancelada`
         } else if (req.body.reservado === "reset"){
             functions.resetReservesOfTheDay();
@@ -105,7 +106,7 @@ module.exports = {
     },
 
     reserve: async (req, res) => {
-        console.log("DESDE LA API: ",req.body)
+        // console.log("DESDE LA API: ",req.body)
 
         const reserve = req.body;
         reserve.cancha = Number(req.body.cancha);
@@ -125,6 +126,20 @@ module.exports = {
 
     },
 
+    sendReserveHistory: async (req, res) => {
+
+        const reserves = await db.Reserve.findAll();
+
+        const sendHistory = await functions.sendHistoryReserve(reserves);
+        console.log(sendHistory)
+        res.json({
+            meta: {
+                status: 200,
+            },
+            data: sendHistory
+        })
+    },
+
     delete: async (req, res) => {
 
         const reserveDeleted = await db.Reserve.destroy({
@@ -142,6 +157,18 @@ module.exports = {
             data: reserve
         });
 
+    },
+
+    admin: async (req,res) => {
+        const admin = await functionsAdmin.getSession();
+        // console.log("ADMIN SESSION FROM localhost:3000/admin", admin)
+
+        res.json({
+            meta:{
+                status: 200,
+                admin: admin
+            }
+        })
     }
 
 }

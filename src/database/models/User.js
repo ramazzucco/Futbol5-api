@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
-        telefono: {
-            type: DataTypes.INTEGER,
+        password: {
+            type: DataTypes.STRING,
             allowNull: false
         }
     }
@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     }
 
-    const Usuario = sequelize.define('Usuario',cols,config);
+    const User = sequelize.define('User',cols,config);
 
-    return Usuario;
+    return User;
 
 }

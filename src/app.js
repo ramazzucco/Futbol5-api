@@ -1,16 +1,19 @@
 const createError = require('http-errors');
 const express = require('express');
+const session = require ('express-session');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride =  require('method-override');
 require("dotenv").config();
-// const session = require ('express-session');
+const functions = require("./functions/admin");
+const urlBaseApiProd = functions.getUrlApiAdminProd();
+const urlBaseApiDev = functions.getUrlApiAdminDev();
+const urlBaseApi = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? urlBaseApiDev : urlBaseApiProd;
+const CORS_PORT = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? 80 : 3000;
 
-
-// const indexRouter = require('../public/build/static/index.html');
-const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
 const apiRouter = require("./routes/api/reserves");
 
 const app = express();
@@ -25,26 +28,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(methodOverride('_method'));
-// app.use(
-//   session({
-//     cookie:{
-//       secure: true,
-//       maxAge:60000
-//     },
-//     secret:'algo le tenemos que pasar',
-//     resave: false,
-//     saveUninitialized: true
-//   })
-// );
+app.use(
+  session({
+    cookie:{
+      secure: true,
+      maxAge:60000
+    },
+    secret:'algo le tenemos que pasar',
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
 // app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 
 app.use(cors())
-app.get('api-futbol5.herokuapp.com/api', function (req, res, next) {
+app.get(urlBaseApi, function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
-app.listen(3000, function () {
+app.listen(CORS_PORT, function () {
   console.log('CORS-enabled web server listening on port 80')
 })
 

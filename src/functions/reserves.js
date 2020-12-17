@@ -1,6 +1,16 @@
 let db = require("../database/models");
 const nodemailer = require("nodemailer");
 
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: "rsmazzucco@gmail.com",
+        pass: "cakl jqmk qevs jkvd",
+    },
+});
+
 module.exports = {
 
     getCanchaYhorario: async () => {
@@ -113,7 +123,7 @@ module.exports = {
 
         const newMessage = `<p>IMPORTANTE! : Tiene 1hs para abonar la reserva, de lo contrario la misma será cancelada automaticamente por el sistema.</p>
         <hr>
-        <div style="background: rgb(0,200,0); margin-left: auto; margin-right: auto; width: 50%;margin-top: 10%;margin-bottom: 10%; box-shadow: 0 0 9px 7px black; border-radius: 25px; padding: 20px;">
+        <div style="background: rgb(0,200,0); margin-left: auto; margin-right: auto; width: 50%;margin-top: 10%;margin-bottom: 10%; box-shadow: 0px 0px 9px 7px black; border-radius: 25px; padding: 20px;">
             <div style="border-bottom: 2px solid gray;">
                 <h4 style="display: inline; color: rgb(0,100,0); margin-right: 20%;">Tu Marca</h4><h4 style="display: inline-block; color: rgb(0,100,0); font-weight: bold;">La Reserva fue Exitosa!</h4>
             </div>
@@ -127,16 +137,6 @@ module.exports = {
 
         async function main(){
 
-            const transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 465,
-                secure: true,
-                auth: {
-                    user: "rsmazzucco@gmail.com",
-                    pass: "cakl jqmk qevs jkvd",
-                },
-            });
-
             const info = await transporter.sendMail({
                 from: '"Reserva Exitosa" <rsmazzucco@gmail.com>',
                 to: `${data.email}`,
@@ -148,6 +148,68 @@ module.exports = {
 
             console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
+        }
+
+
+        main().catch(console.error);
+    },
+
+    sendHistoryReserve: async (reserves) => {
+
+        const message = `
+        <div >
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">telefono</th>
+                        <th scope="col">Cancha</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Hora Y Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${reserves.map((reserve) => {
+                        return (
+                            `<tr>
+                                <td>${reserve.id}</td>
+                                <td>${reserve.nombre}</td>
+                                <td>${reserve.apellido}</td>
+                                <td>${reserve.email}</td>
+                                <td>${reserve.telefono}</td>
+                                <td>${reserve.cancha}</td>
+                                <td>${reserve.horario}</td>
+                                <td>${reserve.createdAt}</td>
+                            </tr>`
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
+        <style type="text/css">
+            td {
+                border: 1px solid black;
+                text-align: center;
+            }
+        </style>`
+
+        async function main(){
+
+            const info = await transporter.sendMail({
+                from: '"Tu Marca" <rsmazzucco@gmail.com>',
+                to: `<ramazzucco@hotmail.com>`,
+                subject: "Historial de Reservas.",
+                html: message
+            });
+
+            console.log("Message sent: %s", info.messageId);
+
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+            return info;
         }
 
 
