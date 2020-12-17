@@ -3,7 +3,7 @@ const functions = require("../functions/admin");
 const bcrypt = require("bcrypt");
 const urlBaseAppProd = functions.getUrlAppAdminProd();
 const urlBaseAppDev = functions.getUrlAppAdminDev();
-const urlBaseApp = urlBaseAppProd;
+const urlBaseApp = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? urlBaseAppDev : urlBaseAppProd;
 
 module.exports = {
 
@@ -32,7 +32,7 @@ module.exports = {
 
         if(bcrypt.compareSync(password, admin[0].password)){
             await admin.length ? functions.setSession(true) : functions.setSession(false);
-            res.redirect(urlBaseAppProd + "/admin")
+            res.redirect(urlBaseApp + "/admin")
         } else {
             const access = false;
             const error = "Contraseña Incorrecta";

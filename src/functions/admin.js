@@ -10,12 +10,12 @@ module.exports = {
     },
 
     getUrlApiAdminProd: () => {
-        const urlApiProd = "https://api-futbol5.herokuapp.com/";
+        const urlApiProd = "https://api-futbol5.herokuapp.com";
         return urlApiProd;
     },
 
     getUrlApiAdminDev: () => {
-        const urlApiDev ="http://localhost:3000/";
+        const urlApiDev ="http://localhost:3000";
         return urlApiDev;
     },
 
@@ -25,7 +25,7 @@ module.exports = {
     },
 
     getUrlAppAdminDev: () => {
-        const urlAppDev = "http://localhost:5000/admin";
+        const urlAppDev = "http://localhost:5000";
         return urlAppDev;
     },
 

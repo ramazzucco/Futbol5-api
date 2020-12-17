@@ -44,7 +44,7 @@ app.use(
 app.use('/admin', adminRouter);
 
 app.use(cors())
-app.get(urlBaseApi, function (req, res, next) {
+app.get(urlBaseApi + "/api", function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
