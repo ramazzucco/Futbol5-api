@@ -30,7 +30,7 @@ module.exports = {
             }
         })
 
-        if(password == admin[0].password){
+        if(bcrypt.compareSync(password, admin[0].password)){
             await admin.length ? functions.setSession(true) : functions.setSession(false);
             res.redirect(urlBaseAppProd + "/admin")
         } else {
