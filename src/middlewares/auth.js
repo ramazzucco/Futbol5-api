@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
 
     const session = functions.getSession(user);
 
-    const auth = bcrypt.compareSync(process.env.MY_PASS,user.token)
+    const auth = bcrypt.compareSync(`${process.env.MY_PASS}`,user.token)
 
     auth ? next() : res.redirect(`${urlBaseApi}`);
 };
