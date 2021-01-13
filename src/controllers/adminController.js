@@ -57,7 +57,7 @@ module.exports = {
         const sessionsAdmin = [];
 
         sessionsData.map( session => {
-            session.status == "admin" && session.key == key ? sessionsAdmin.push(session) : ""
+            session.status == "admin" && bcrypt.compareSync(key, session.key) ? sessionsAdmin.push(session) : ""
         })
 
         if(sessionsAdmin.length){
