@@ -1,5 +1,15 @@
-let db = require("../database/models");
+const fs = require("fs");
+const path = require("path");
+const pathCanchaYhorario = path.join(__dirname,"../database/canchayhorario.json");
+const dataCanchaYhorarioJSON = fs.readFileSync(pathCanchaYhorario, {encoding: "utf-8"});
+const CanchaYhorarioData = JSON.parse(dataCanchaYhorarioJSON);
+const pathReserves = path.join(__dirname,"../database/reserves.json");
+const dataReservesJSON = fs.readFileSync(pathReserves, {encoding: "utf-8"});
+const ReservesData = JSON.parse(dataReservesJSON);
 const nodemailer = require("nodemailer");
+const HTMLemail = require("./reserveConfirmationEmail");
+const HTMLreserveHistory = require("./historyReserveEmail");
+const { info } = require("console");
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -7,106 +17,11 @@ const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         user: "rsmazzucco@gmail.com",
-        pass: "cakl jqmk qevs jkvd",
+        pass: process.env.NODEMAILER_PASS,
     },
 });
 
 module.exports = {
-
-    getCanchaYhorario: async () => {
-        const cancha_1 = await db.Cancha_1.findAll();
-        const cancha_2 = await db.Cancha_2.findAll();
-        const cancha_3 = await db.Cancha_3.findAll();
-        const cancha_4 = await db.Cancha_4.findAll();
-
-        return [cancha_1, cancha_2, cancha_3, cancha_4];
-    },
-
-    modify: async (cancha, horario, reservado, reserveid) => {
-        if (cancha === 1) {
-            const cancha_1 = await db.Cancha_1.findAll();
-            reservado === true
-                ? (cancha_1.reservado = true)
-                : (cancha_1.reservado = false);
-            cancha_1.reserve_id = reserveid;
-            const reserveModified = await db.Cancha_1.update(cancha_1, {
-                where: {
-                    hora: horario,
-                },
-            });
-        } else if (cancha === 2) {
-            const cancha_2 = await db.Cancha_2.findAll();
-            reservado === true
-                ? (cancha_2.reservado = true)
-                : (cancha_2.reservado = false);
-            cancha_2.reserve_id = reserveid;
-            const reserveModified = await db.Cancha_2.update(cancha_2, {
-                where: {
-                    hora: horario,
-                },
-            });
-        } else if (cancha === 3) {
-            const cancha_3 = await db.Cancha_3.findAll();
-            reservado === true
-                ? (cancha_3.reservado = true)
-                : (cancha_3.reservado = false);
-            cancha_3.reserve_id = reserveid;
-            const reserveModified = await db.Cancha_3.update(cancha_3, {
-                where: {
-                    hora: horario,
-                },
-            });
-        } else if (cancha === 4) {
-            const cancha_4 = await db.Cancha_4.findAll();
-            reservado === true
-                ? (cancha_4.reservado = true)
-                : (cancha_4.reservado = false);
-            cancha_4.reserve_id = reserveid;
-            const reserveModified = await db.Cancha_4.update(cancha_4, {
-                where: {
-                    hora: horario,
-                },
-            });
-        }
-    },
-
-    resetReservesOfTheDay: async () => {
-        const cancha_1 = await db.Cancha_1.update(
-            { reservado: false },
-            { where: { reservado: true } }
-        );
-        const cancha_2 = await db.Cancha_2.update(
-            { reservado: false },
-            { where: { reservado: true } }
-        );
-        const cancha_3 = await db.Cancha_3.update(
-            { reservado: false },
-            { where: { reservado: true } }
-        );
-        const cancha_4 = await db.Cancha_4.update(
-            { reservado: false },
-            { where: { reservado: true } }
-        );
-    },
-
-    selectCanchaYhorario: async (id) => {
-        let cancha = "";
-
-        if (id == 1) {
-            const cancha_1 = await db.Cancha_1.findAll();
-            cancha = cancha_1;
-        } else if (id == 2) {
-            const cancha_2 = await db.Cancha_2.findAll();
-            cancha = cancha_2;
-        } else if (id == 3) {
-            const cancha_3 = await db.Cancha_3.findAll();
-            cancha = cancha_3;
-        } else if (id == 4) {
-            const cancha_4 = await db.Cancha_4.findAll();
-            cancha = cancha_4;
-        }
-        return cancha;
-    },
 
     getDate: () => {
         const date = new Date();
@@ -119,21 +34,88 @@ module.exports = {
         return fecha;
     },
 
-    sendMesagge: (data) => {
+    getDataPage: (data, data2) => {
+        const dataPage = {
+            header: [...data.page.header.links],
+            section: {...data.page.section},
+            footer: {
+                redessociales: [...data.page.footer.redessociales],
+                contacto: [...data.page.footer.contacto]
+            }
+        }
 
-        const newMessage = `<p>IMPORTANTE! : Tiene 1hs para abonar la reserva, de lo contrario la misma será cancelada automaticamente por el sistema.</p>
-        <hr>
-        <div style="background: rgb(0,200,0); margin-left: auto; margin-right: auto; width: 50%;margin-top: 10%;margin-bottom: 10%; box-shadow: 0px 0px 9px 7px black; border-radius: 25px; padding: 20px;">
-            <div style="border-bottom: 2px solid gray;">
-                <h4 style="display: inline; color: rgb(0,100,0); margin-right: 20%;">Tu Marca</h4><h4 style="display: inline-block; color: rgb(0,100,0); font-weight: bold;">La Reserva fue Exitosa!</h4>
-            </div>
-            <div style="padding: 20px;">
-                <h4 >${data.nombre} ${data.apellido}</h4>
-                <h4>Numero de Reserva: ${data.id}</h4>
-                <h4 style="text-align: center;">Ha Reservado la CANCHA N° ${data.cancha}, a las ${data.horario}.!</h4>
-            </div>
-        </div><hr>
-        <ul><li>Telefono: 4-331122</li><li>Direccion: Calle Falsa 123</li><li>Email: tumarca@gmail.com</li></ul>`
+        const horarios = [];
+
+        data2.map( cancha => {
+
+            cancha.options.map( horario => {
+                horarios.push(horario);
+            })
+
+        })
+
+        return {dataPage,data2,horarios};
+    },
+
+    getOptionsResponseForm: (string, object) => {
+        let data = {};
+
+        if(string == "sendReserve"){
+            data = {
+                action: "sendReserve",
+                displayForm: "d-flex flex-column",
+                displayResponse: "d-none",
+                color: "primary",
+                headerTitle: "Reserva tu cancha",
+                icon: "",
+                title: "",
+                content: ""
+            }
+        }
+        if(string == "already reserved"){
+            data = ({
+                action: "failed",
+                displayForm: "d-none",
+                displayResponse: "d-flex",
+                color: "danger",
+                headerTitle: "Error!",
+                icon: "exclamation-circle",
+                title: "lo sentimos!",
+                content: "El horario seleccionado ya esta reservado.",
+                button: true
+            })
+        }
+        if(string == "succefull"){
+            data = ({
+                action: "succefull",
+                displayForm: "d-none",
+                displayResponse: "d-flex",
+                color: "success",
+                headerTitle: "Reserva Exitosa",
+                icon: "check-circle",
+                title: "sus datos",
+                content:`${object.name + " " + object.lastname} ha reservado la Cancha N° ${object.cancha} a las ${object.horario} Hs. Su Telefono es: ${object.telefono}`
+            })
+        }
+        if(string == "failed"){
+            data = ({
+                action: "failed",
+                displayForm: "d-none",
+                displayResponse: "d-flex",
+                color: "danger",
+                headerTitle: "Error!",
+                icon: "exclamation-circle",
+                title: "lo sentimos!",
+                content: "Compruebe su conexion a internet e intentelo nuevamente."
+            })
+        }
+
+        return data;
+    },
+
+    sendReserveConfirmByEmail: (data) => {
+
+        const message = HTMLemail.getHTMLemail(data);
 
         async function main(){
 
@@ -141,60 +123,24 @@ module.exports = {
                 from: '"Reserva Exitosa" <rsmazzucco@gmail.com>',
                 to: `${data.email}`,
                 subject: "Reserva Exitosa!",
-                html: newMessage
+                html: message
             });
 
             console.log("Message sent: %s", info.messageId);
 
             console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
+            return info;
         }
 
+        const sendEmailConfirmation = main().catch(error => { return error });
 
-        main().catch(console.error);
+        return sendEmailConfirmation;
     },
 
-    sendHistoryReserve: async (reserves) => {
+    sendHistoryByEmail: async (reserves) => {
 
-        const message = `
-        <div >
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">telefono</th>
-                        <th scope="col">Cancha</th>
-                        <th scope="col">Horario</th>
-                        <th scope="col">Hora Y Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${reserves.map((reserve) => {
-                        return (
-                            `<tr>
-                                <td>${reserve.id}</td>
-                                <td>${reserve.nombre}</td>
-                                <td>${reserve.apellido}</td>
-                                <td>${reserve.email}</td>
-                                <td>${reserve.telefono}</td>
-                                <td>${reserve.cancha}</td>
-                                <td>${reserve.horario}</td>
-                                <td>${reserve.createdAt}</td>
-                            </tr>`
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-        <style type="text/css">
-            td {
-                border: 1px solid black;
-                text-align: center;
-            }
-        </style>`
+        const message = HTMLreserveHistory.getHTMLreserveHistory(reserves);
 
         async function main(){
 
@@ -212,8 +158,9 @@ module.exports = {
             return info;
         }
 
+        const sendEmail = main().catch(error => { return error });
 
-        main().catch(console.error);
+        return sendEmail;
     },
 
 };

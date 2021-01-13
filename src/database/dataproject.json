@@ -1,0 +1,142 @@
+{
+ "reservas": {
+  "total": 80
+ },
+ "canchas": {
+  "cantidad": 3,
+  "model": {
+   "number": 5,
+   "status": "incomplete",
+   "options": [
+    {
+     "horario": "15:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "16:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "17:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "18:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "19:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "20:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "21:00",
+     "reservado": false,
+     "cancha": 5,
+     "reserve_id": ""
+    },
+    {
+     "horario": "22:00",
+     "reservado": false,
+     "cancha": "",
+     "reserve_id": ""
+    }
+   ]
+  }
+ },
+ "horarios": [
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+  "22:00"
+ ],
+ "horarios_model": {
+  "horario": "00:00",
+  "reservado": false,
+  "cancha": "",
+  "reserve_id": ""
+ },
+ "page": {
+  "header": {
+   "links": [
+    "home",
+    "instalaciones",
+    "cumpleaños",
+    "escuelita",
+    "promociones"
+   ]
+  },
+  "section": {
+   "home": {
+    "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Obcaecati voluptate dolorem, omnis amet doloremque suscipit a distinctio odit delectus laboriosam accusamus facilis?Voluptatem magni commodi sed, est facere perferendis quam quaerat suscipit vero voluptatum repudiandae, dolore aperiam praesentium temporibus ducimus maiores voluptatibus? Repellendus dignissimos saepe modi asperiores alias, odio tempora autem neque! Temporibus sit repellendus sint atque, sed est, at illum veritatis nam dolorum ad ea commodi sequi officiis aliquam inventore soluta provident recusandae. Itaque porro facere deleniti repellat voluptatum iusto est? Voluptas culpa error inventore dicta eos, facere minima rem labore harum reiciendis impedit delectus commodi. Recusandae distinctio odio culpa molestiae qui, harum illum? Quas eos suscipit, eligendi deleniti est dicta!",
+    "sponsors": [
+     {
+      "name": "auspiciante 1",
+      "image": "sin_imagen.jpg"
+     },
+     {
+      "name": "auspiciante 2",
+      "image": "sin_imagen.jpg"
+     },
+     {
+      "name": "auspiciante 3",
+      "image": "sin_imagen.jpg"
+     },
+     {
+      "name": "auspiciante 4",
+      "image": "sin_imagen.jpg"
+     }
+    ]
+   },
+   "instalaciones": {
+    "canchas": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado.",
+    "vesturarios": "Contamos con vesturarios con duchas individuales, sector para cambiarse y mas.",
+    "parrillasybar": "Contamos con un sector de parrillas y mesas para disfrutar de un buen asado despues del partido. Ademas tambien tenemos un bar con buffet para poder picar y beber algo con amigos."
+   },
+   "cumpleaños": "Contamos con una gran experiencia y trayectoria en organizar cumpleaños deportivos infantiles tanto para niños como cumpleaños mixtos. Llevamos más de 80 cumpleaños realizados!! Los cumpleaños en (MARCA) se caracterizan por brindarle a nuestros clientes , la exclusividad total del predio durante el evento, esto quiere decir que solo el cumpleañero y sus invitados podrán usar las instalaciones.A la hora de elegir el tipo de evento a organizar, las opciones son muy variadas , dependiendo si el cumpleaños es mixto o solo para varones. Contamos con animadoras para niñas, referees, profes y muchas actividades que contemplan la integración de todos. El Pack básico del cumpleaños incluye 2 hs de cancha de futbol, snack y bebidas libres y 2 panchos por chico, sin embargo disponemos varias alternativas que podrían incluir desde panchos, hamburguesas, pizzas etc . El cumpleaños se organiza y arma a la medida de quien lo lleve a cabo, con al menos 2 personas enfocadas en servir, asistir y mantener limpio el lugar.",
+   "escuelita": "La escuela de fútbol es un proyecto formativo desarrollado bajo el paraguas del complejo (MARCA). Nació para ofrecer a niños y niñas su primer contacto con el fútbol de una manera lúdica, utilizando el fútbol como medio de formación, en un clima que garantice un entorno favorable para potenciar valores como la amistad, el respeto, la unidad, la solidaridad, la superación, la disciplina y todos los méritos necesarios para el desarrollo de este deporte.",
+   "promociones": "No tenemos promociones por el momento."
+  },
+  "footer": {
+   "redessociales": [
+    {
+     "nombre": "facebook",
+     "url": "www.facebook.com"
+    },
+    {
+     "nombre": "twitter",
+     "url": "www.twitter.com"
+    },
+    {
+     "nombre": "instagram",
+     "url": "www.instagram.com"
+    }
+   ],
+   "contacto": [
+    "Direccion: Calle Falsa 123",
+    "Telefono: 4-123456",
+    "Whatsapp: 3415-12345667",
+    "E-mail: tumarca@hotmail.com"
+   ]
+  }
+ }
+}

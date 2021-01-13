@@ -1,40 +1,30 @@
-let db = require("../database/models");
+const fs = require("fs");
+const path = require("path");
+const sessionsPath = path.join(__dirname, "../database/sessions.json");
+const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+const sessionsData = JSON.parse(sessionsDataJSON);
 
-let admin = false;
+const bcrypt = require("bcrypt");
+
+const developer = process.env.MY_PASS;
+
+const session = [];
 
 module.exports = {
-
-    getEnviroment: () => {
-        const enviroment = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? "development" : "production";
-        return enviroment;
+    setSession: async (user) => {
+        const findSession = sessionsData.find(session => session.password == user.password);
+        findSession ? console.log("Ya existe la session") : sessionsData.push(user);
+        await fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
     },
 
-    getUrlApiAdminProd: () => {
-        const urlApiProd = "https://api-futbol5.herokuapp.com";
-        return urlApiProd;
+    getSession: (user) => {
+        const getUserSession = sessionsData.find( u => u.password == user.password)
+        session.push(getUserSession);
+        return session;
     },
 
-    getUrlApiAdminDev: () => {
-        const urlApiDev ="http://localhost:3000";
-        return urlApiDev;
-    },
-
-    getUrlAppAdminProd: () => {
-        const urlAppProd = "https://futbol5-app.herokuapp.com";
-        return urlAppProd;
-    },
-
-    getUrlAppAdminDev: () => {
-        const urlAppDev = "http://localhost:5000";
-        return urlAppDev;
-    },
-
-    setSession: (data) => {
-        admin = data
-    },
-
-    getSession: () => {
-        return admin;
+    closeSession: (user) => {
+        const sessionDeleted = sessionsData.filter(session => session.password != user.password);
+        fs.writeFileSync(sessionsPath, JSON.stringify(sessionDeleted,null," "))
     }
-
-}
+};

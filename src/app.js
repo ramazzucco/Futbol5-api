@@ -1,20 +1,20 @@
 const createError = require('http-errors');
 const express = require('express');
-const session = require ('express-session');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
 const methodOverride =  require('method-override');
 require("dotenv").config();
-const functions = require("./functions/admin");
-const urlBaseApiProd = functions.getUrlApiAdminProd();
-const urlBaseApiDev = functions.getUrlApiAdminDev();
-const urlBaseApi = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? urlBaseApiDev : urlBaseApiProd;
-const CORS_PORT = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? 80 : 3000;
 
-const adminRouter = require('./routes/admin');
-const apiRouter = require("./routes/api/reserves");
+const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? process.env.URL_API_DEV : process.env.URL_API_PROD;
+const PORT_CORS = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? process.env.PORT_CORS_DEV : process.env.PORT_CORS_PROD;
+
+const indexRouter = require("./routes/index");
+const apiRouterAdmin = require("./routes/api/admin");
+const apiRouterReserves = require("./routes/api/reserves");
+const apiRouterPage = require("./routes/api/page");
 
 const app = express();
 
@@ -22,12 +22,6 @@ const app = express();
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(methodOverride('_method'));
 app.use(
   session({
     cookie:{
@@ -40,19 +34,29 @@ app.use(
   })
 );
 
-// app.use('/', indexRouter);
-app.use('/admin', adminRouter);
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(methodOverride('_method'));
 
+// PAGE Route.
+app.use('/', indexRouter);
+
+//CORS.
 app.use(cors())
-app.get(urlBaseApi + "/api", function (req, res, next) {
+app.get(URL_API, function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
-
-app.listen(CORS_PORT, function () {
-  console.log('CORS-enabled web server listening on port 80')
+app.listen(PORT_CORS, function () {
+  console.log(`CORS-enabled web server listening on port ${PORT_CORS}`)
 })
 
-app.use('/api', apiRouter);
+//API Routes.
+app.use('/api/admin', apiRouterAdmin);
+app.use('/api/reserves', apiRouterReserves);
+app.use("/api/page", apiRouterPage)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

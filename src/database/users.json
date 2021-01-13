@@ -1,0 +1,19 @@
+[
+ {
+  "name": "Ramiro",
+  "lastname": "Mazzucco",
+  "password": "$2b$10$DNXwnNqSCGfxPSJ.cWIdhOWqQA.Eho/fKSLzufBsV96GYShVQsaoW",
+  "email": "ramazzucco@hotmail.com",
+  "phone": "155777666",
+  "adress": "Calle falsa 123",
+  "status": "admin",
+  "key": "myKey"
+ },
+ {
+  "name": "Usuario",
+  "lastname": "Invitado",
+  "password": "$2b$10$IJ9K.n.l2nj/dn5skhBrjOVKf5.mUXVFPRYI7NaO6/.I26OylTBHq",
+  "status": "admin",
+  "key": "myKey"
+ }
+]

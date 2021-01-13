@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const controllers = require("../../controllers/reserveController")
+const controllers = require("../../controllers/reserveController");
+const validationForm = require("../../middlewares/validatonForm");
+const auth = require("../../middlewares/auth");
 
-router.get('/reserves', controllers.getReserves);
+router.post('/', auth, controllers.getReserves);
 
-router.get("/reserves/admin", controllers.admin);
+router.post("/reset", auth, controllers.resetReserves);
 
-router.get("/reserves/history", controllers.sendReserveHistory);
+router.post("/create", validationForm, controllers.create);
 
-router.post("/reserves/modify", controllers.modifyReserve);
+router.post('/canchaYhorario', auth, controllers.getCanchaYhorario);
 
-router.post("/reserves/cancel", controllers.modifyReserve);
+router.post('/reservesoftheday', auth, controllers.reservesOfTheDay);
 
-router.post("/reserves/send", controllers.reserve);
+router.post("/sendhistorybyemail", auth, controllers.sendHistoryByEmail);
 
-router.post('/reserves/:id', controllers.modifySingleReserve);
+router.post('/reserve/:id', auth, controllers.getReservesByCanchaYhorario);
 
-router.get('/reserves/canchaYhorario/:id', controllers.selectCanchaYhorario);
 
-router.get('/reserves/canchaYhorario', controllers.getCanchaYhorario);
+router.put('/modify', auth, controllers.modifyReserve);
 
-router.get('/reserves/reservesoftheday', controllers.reservesOfTheDay);
 
-router.delete("/reserves/delete/:id", controllers.delete);
+router.delete("/delete/:id", auth, controllers.delete);
 
 module.exports = router;
