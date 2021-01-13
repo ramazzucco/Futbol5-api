@@ -15,7 +15,8 @@ const urlBaseApp =
     process.env.USERDOMAIN == "DESKTOP-O3O462B"
         ? process.env.URL_APP_DEV
         : process.env.URL_APP_PROD;
-const token = bcrypt.hashSync(`${process.env.MY_PASS}`, 10);
+const key = process.env.MY_PASS;
+const token = bcrypt.hashSync(key, 10);
 
 module.exports = {
 
@@ -24,18 +25,27 @@ module.exports = {
         const newUser = req.errors ? req.errors : [req.body];
         const passwordHash = bcrypt.hashSync(req.body.password, 10);
         newUser[0].password = passwordHash;
-        usersData.push(newUser[0]);
 
         if(newUser[0].status == "admin" && key == newUser[0].key){
+
+            const hashedKey = bcrypt.hashSync(newUser[0].key, 10);
+
+            newUser[0].key = hashedKey;
+
+            usersData.push(newUser[0]);
+
             fs.writeFileSync(usersPath, JSON.stringify(usersData, null, " "));
+
             functions.setSession(newUser[0]);
+
             res.json({
                 meta: {
                     status: 200,
                     message: "Admin creado",
                 },
-                data: newUser
+                data: newUser[0]
             })
+
         } else {
             res.redirect(`${urlBaseApi}`);
         }

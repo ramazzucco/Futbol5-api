@@ -1,1 +1,9 @@
-[]
+[
+ {
+  "name": "Ramiro",
+  "lastname": "Mazzucco",
+  "password": "$2b$10$4ka.09fSmOmJyDpHAqO6t.F9.XOmduV466TR1VcSmN9juwVK7tHCi",
+  "status": "admin",
+  "key": "$2b$10$hxKApx3uLQRLJfZzKZkMGeoz1U2yE2K/0YDs0O6/F0K/F0ceVFpRe"
+ }
+]

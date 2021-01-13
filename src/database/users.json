@@ -2,18 +2,8 @@
  {
   "name": "Ramiro",
   "lastname": "Mazzucco",
-  "password": "$2b$10$DNXwnNqSCGfxPSJ.cWIdhOWqQA.Eho/fKSLzufBsV96GYShVQsaoW",
-  "email": "ramazzucco@hotmail.com",
-  "phone": "155777666",
-  "adress": "Calle falsa 123",
+  "password": "$2b$10$4ka.09fSmOmJyDpHAqO6t.F9.XOmduV466TR1VcSmN9juwVK7tHCi",
   "status": "admin",
-  "key": "myKey"
- },
- {
-  "name": "Usuario",
-  "lastname": "Invitado",
-  "password": "$2b$10$IJ9K.n.l2nj/dn5skhBrjOVKf5.mUXVFPRYI7NaO6/.I26OylTBHq",
-  "status": "admin",
-  "key": "myKey"
+  "key": "$2b$10$hxKApx3uLQRLJfZzKZkMGeoz1U2yE2K/0YDs0O6/F0K/F0ceVFpRe"
  }
 ]

@@ -7,7 +7,7 @@ const logger = require('morgan');
 const methodOverride =  require('method-override');
 require("dotenv").config();
 
-const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? process.env.URL_API_DEV : `${process.env.URL_API_PROD}/api`;
+const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? `${process.env.URL_API_DEV}/api` : `${process.env.URL_API_PROD}/api`;
 const PORT_CORS = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? process.env.PORT_CORS_DEV : process.env.PORT_CORS_PROD;
 
 const indexRouter = require("./routes/index");

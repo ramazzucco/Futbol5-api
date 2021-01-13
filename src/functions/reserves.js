@@ -9,7 +9,6 @@ const ReservesData = JSON.parse(dataReservesJSON);
 const nodemailer = require("nodemailer");
 const HTMLemail = require("./reserveConfirmationEmail");
 const HTMLreserveHistory = require("./historyReserveEmail");
-const { info } = require("console");
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
