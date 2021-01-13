@@ -15,8 +15,7 @@ const urlBaseApp =
     process.env.USERDOMAIN == "DESKTOP-O3O462B"
         ? process.env.URL_APP_DEV
         : process.env.URL_APP_PROD;
-const token = bcrypt.hashSync(process.env.MY_PASS, 10);
-
+const token = bcrypt.hashSync(`${process.env.MY_PASS}`, 10);
 
 module.exports = {
 
