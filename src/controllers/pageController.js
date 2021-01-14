@@ -17,7 +17,7 @@ module.exports = {
             data: pageData
         })
     },
-    modifycanchayhorario: async (req, res) => {
+    modifycanchayhorario: (req, res) => {
 
         if(req.body.cancha_amount){
             const amountToModify = Number(req.body.cancha_amount);
@@ -28,8 +28,8 @@ module.exports = {
                 CanchaYhorarioData.length = dif;
                 pageData.canchas.cantidad = dif;
 
-                await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
-                await fs.writeFileSync(pathpage, JSON.stringify(pageData,null," "));
+                fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
+                fs.writeFileSync(pathpage, JSON.stringify(pageData,null," "));
 
             }
 
@@ -47,8 +47,8 @@ module.exports = {
                     CanchaYhorarioData.push(newCancha);
                     pageData.canchas.cantidad = lastNumberOfCancha + 1;
 
-                    await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
-                    await fs.writeFileSync(pathpage, JSON.stringify(pageData,null," "));
+                    fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
+                    fs.writeFileSync(pathpage, JSON.stringify(pageData,null," "));
                 }
 
             }
@@ -96,8 +96,8 @@ module.exports = {
                     ? pageData.horarios.unshift(req.body.horarios)
                     : pageData.horarios.push(req.body.horarios);
 
-                await fs.writeFileSync(pathCanchaYhorario,JSON.stringify(CanchaYhorarioData,null," "));
-                await fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+                fs.writeFileSync(pathCanchaYhorario,JSON.stringify(CanchaYhorarioData,null," "));
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
 
             } else {
                 const horarioToRemove = req.body.horarios;
@@ -117,8 +117,8 @@ module.exports = {
                         : cancha.options.pop(positionOfHorarioToRemove)
                 }
 
-                await fs.writeFileSync(pathCanchaYhorario,JSON.stringify(CanchaYhorarioData,null," "));
-                await fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+                fs.writeFileSync(pathCanchaYhorario,JSON.stringify(CanchaYhorarioData,null," "));
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
 
             }
         }
