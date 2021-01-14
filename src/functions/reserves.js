@@ -112,6 +112,35 @@ module.exports = {
         return data;
     },
 
+    modifyOneCanchayhorarioById: (id) => {
+
+        const CanchayhorarioToCancel = [];
+        let error = {};
+
+        CanchaYhorarioData.map( cancha=> {
+
+            const findCanchaYhorarioToCancel = cancha.options.find( option => option.reserve_id == id );
+
+            if(typeof findCanchaYhorarioToCancel != "undefined"){
+                CanchayhorarioToCancel.push(findCanchaYhorarioToCancel)
+            } else {
+                error = { error: true, message: `El id ${id} no coincide con ninguna cancha y horario reservado` };
+            }
+
+        })
+
+        if(CanchayhorarioToCancel.length){
+            const horarioToCancel =
+                CanchaYhorarioData[CanchayhorarioToCancel[0].cancha - 1].options.indexOf(CanchayhorarioToCancel[0]);
+
+            CanchaYhorarioData[CanchayhorarioToCancel[0].cancha - 1].options[horarioToCancel].reservado = false;
+        }
+
+        fs.writeFileSync(pathCanchaYhorario,JSON.stringify(CanchaYhorarioData,null," "));
+
+        return error;
+    },
+
     sendReserveConfirmByEmail: (data) => {
 
         const message = HTMLemail.getHTMLemail(data);

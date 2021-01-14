@@ -1,59 +1,53 @@
 {
  "reservas": {
-  "total": 80
+  "total": 81
  },
  "canchas": {
-  "cantidad": 3,
+  "cantidad": 4,
   "model": {
-   "number": 5,
+   "number": 4,
    "status": "incomplete",
    "options": [
     {
      "horario": "15:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "16:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "17:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "18:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "19:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "20:00",
      "reservado": false,
-     "cancha": 5,
+     "cancha": 4,
      "reserve_id": ""
     },
     {
      "horario": "21:00",
      "reservado": false,
-     "cancha": 5,
-     "reserve_id": ""
-    },
-    {
-     "horario": "22:00",
-     "reservado": false,
-     "cancha": "",
+     "cancha": 4,
      "reserve_id": ""
     }
    ]
@@ -66,8 +60,7 @@
   "18:00",
   "19:00",
   "20:00",
-  "21:00",
-  "22:00"
+  "21:00"
  ],
  "horarios_model": {
   "horario": "00:00",

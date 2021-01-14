@@ -10,8 +10,10 @@ const pathReserves = path.join(__dirname,"../database/reserves.json");
 const dataReservesJSON = fs.readFileSync(pathReserves, {encoding: "utf-8"});
 const ReservesData = JSON.parse(dataReservesJSON);
 const horariosOnDB = CanchaYhorarioData[0].options.map( option => { return option.horario}); // Array de horarios.
+const mainfunctions = require("../functions/main");
 const functions = require("../functions/reserves");
 const functionsAdmin = require("../functions/admin");
+const { modifyOneReserve } = require("../functions/reserves");
 
 module.exports = {
 
@@ -182,59 +184,43 @@ module.exports = {
 
         const id = Number(req.params.id)
         let newArrayReserve = [];
+        const errors = [];
 
         if(id == 0){
-            const ids = req.body.ids;
 
-            ids.forEach( async id => {
+            const arrayWithObjectDeleted = await mainfunctions.deleteByArrayId(req.body.ids, ReservesData);
 
-                await ReservesData.map( reserve => {
-
-                    if(reserve.id == id){
-                        const findReserve = ReservesData.find( reserve => reserve.id == id);
-                        const positionIdOnReservesData = ReservesData.indexOf(findReserve);
-
-                        ReservesData.splice(positionIdOnReservesData, ids.length)
-                    }
-
-                })
-
-            });
-
-            newArrayReserve = ReservesData;
-        } else {
-
-            newArrayReserve = ReservesData.filter( reserve => reserve.id != id );
-            const CanchayhorarioToCancel = [];
-
-            CanchaYhorarioData.map( (cancha, i) => {
-
-                const findCanchaYhorarioToCancel = cancha.options.find( option => option.reserve_id == req.params.id );
-
-                typeof findCanchaYhorarioToCancel != "undefined"
-                    ? CanchayhorarioToCancel.push(findCanchaYhorarioToCancel)
-                    : ""
-
-            })
-
-            if(CanchayhorarioToCancel.length){
-                const horarioToCancel =
-                    CanchaYhorarioData[CanchayhorarioToCancel[0].cancha - 1].options.indexOf(CanchayhorarioToCancel[0]);
-
-                CanchaYhorarioData[CanchayhorarioToCancel[0].cancha - 1].options[horarioToCancel].reservado = false;
+            if(arrayWithObjectDeleted.errors.length){
+                errors.push(...arrayWithObjectDeleted.errors)
             }
 
+            newArrayReserve = arrayWithObjectDeleted.data;
+        } else {
+
+            const arrayWithObjectDeleted = await ReservesData.filter( reserve => reserve.id != id );
+
+            newArrayReserve = arrayWithObjectDeleted;
+
+            const canchayhorarioModified = functions.modifyOneCanchayhorarioById(id);
+
+            if (canchayhorarioModified.error){
+                errors.push(canchayhorarioModified)
+            }
         }
 
-        await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData, null," "));
-        await fs.writeFileSync(pathReserves, JSON.stringify(newArrayReserve,null," "));
+        const response =  await mainfunctions.saveOnDB("reserves",newArrayReserve,id);
+
+        if(response){
+            errors.push(...response);
+        }
 
         res.json({
             meta: {
                 status: 200
             },
             data: newArrayReserve,
-            data2: ""
+            data2: "",
+            errors: errors
         });
 
     }

@@ -44,12 +44,6 @@
     "reservado": false,
     "cancha": 1,
     "reserve_id": 49
-   },
-   {
-    "horario": "22:00",
-    "reservado": false,
-    "cancha": 1,
-    "reserve_id": ""
    }
   ]
  },
@@ -67,7 +61,7 @@
     "horario": "16:00",
     "reservado": false,
     "cancha": 2,
-    "reserve_id": 79
+    "reserve_id": 81
    },
    {
     "horario": "17:00",
@@ -98,12 +92,6 @@
     "reservado": false,
     "cancha": 2,
     "reserve_id": 67
-   },
-   {
-    "horario": "22:00",
-    "reservado": false,
-    "cancha": 2,
-    "reserve_id": ""
    }
   ]
  },
@@ -152,11 +140,53 @@
     "reservado": false,
     "cancha": 3,
     "reserve_id": 65
+   }
+  ]
+ },
+ {
+  "number": 4,
+  "status": "incomplete",
+  "options": [
+   {
+    "horario": "15:00",
+    "reservado": false,
+    "cancha": 4,
+    "reserve_id": ""
    },
    {
-    "horario": "22:00",
+    "horario": "16:00",
     "reservado": false,
-    "cancha": 3,
+    "cancha": 4,
+    "reserve_id": ""
+   },
+   {
+    "horario": "17:00",
+    "reservado": false,
+    "cancha": 4,
+    "reserve_id": ""
+   },
+   {
+    "horario": "18:00",
+    "reservado": false,
+    "cancha": 4,
+    "reserve_id": ""
+   },
+   {
+    "horario": "19:00",
+    "reservado": false,
+    "cancha": 4,
+    "reserve_id": ""
+   },
+   {
+    "horario": "20:00",
+    "reservado": false,
+    "cancha": 4,
+    "reserve_id": ""
+   },
+   {
+    "horario": "21:00",
+    "reservado": false,
+    "cancha": 4,
     "reserve_id": ""
    }
   ]
