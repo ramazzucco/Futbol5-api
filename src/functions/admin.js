@@ -57,21 +57,16 @@ module.exports = {
         fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
     },
 
-    getSession: (admin, user) => {
+    getSession: (admin) => {
         const session = [];
         const key = `${process.env.MY_PASS}`;
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
 
-        if(admin != undefined){
-            const getUserSession = sessionsData.filter(
-                session => session.status == admin && bcrypt.compareSync(key, session.key)
-            );
-            session.push(getUserSession[getUserSession.length - 1]);
-        } else {
-            const getUserSession = sessionsData.find( session => session.password == user.password);
-            session.push(getUserSession);
-        }
+        const getAdminSession = sessionsData.filter(
+            session => session.status == admin && bcrypt.compareSync(key, session.key)
+        );
+        session.push(getAdminSession[getAdminSession.length - 1]);
 
         return session;
     },

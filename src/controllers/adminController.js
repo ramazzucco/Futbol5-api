@@ -47,6 +47,8 @@ module.exports = {
 
         const findSession = functions.getSession("admin");
 
+        console.log(findSession)
+
         if(findSession){
             findSession.session = true;
             admin.push(findSession[0]);
