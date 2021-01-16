@@ -47,8 +47,8 @@ module.exports = {
 
         if(password == ""){
             const findSession = functions.getSession();
-
-            findSession[0] == undefined
+            console.log(findSession)
+            findSession == undefined
                 ? admin.push({ error: false, message: "No session!" })
                 : admin.push(findSession[0]);
         } else {
