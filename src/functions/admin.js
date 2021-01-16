@@ -59,15 +59,16 @@ module.exports = {
 
     getSession: (admin) => {
         const session = [];
-        const key = `${process.env.MY_PASS}`;
+        const key = process.env.MY_PASS;
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
 
-        const getAdminSession = sessionsData.filter(
-            session => session.status == admin && bcrypt.compareSync(key, session.key)
-        );
+        const getAdminSession = sessionsData.filter( session => {
+            console.log("session from sessionsdataJSON: ", session)
+            session.status == admin && bcrypt.compareSync(key, session.key)
+        });
         session.push(getAdminSession[getAdminSession.length - 1]);
-
+        console.log("session from getSession: ", session)
         return session;
     },
 
