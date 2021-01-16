@@ -31,7 +31,7 @@ module.exports = {
             res.json({
                 meta: {
                     status: 200,
-                    message: "Admin creado",
+                    message: "Admin created succefully!",
                 },
                 data: newUser[0]
             })
