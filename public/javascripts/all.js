@@ -197,19 +197,20 @@ window.onload = () => {
                 document.querySelector(`.error_${errors[i]}`).innerHTML = `<i class="fas fa-exclamation-circle pr-3"></i>${errors[(i+1)]}`
 
            }
+        } else {
+            // Muestra el loading al enviar formulario de reserva.
+
+            const modalLoading = document.querySelector(".loading");
+            const modalBody = document.querySelector(".modal-body");
+            const modalButton = document.querySelector(".modal button");
+
+            form.classList.toggle("d-flex")
+            form.classList.toggle("d-none");
+            modalBody.classList.add("bg-info");
+            modalLoading.classList.toggle("d-none");
+            modalButton.classList.toggle("d-none");
         }
 
-        // Muestra el loading al enviar formulario de reserva.
-
-        const modalLoading = document.querySelector(".loading");
-        const modalBody = document.querySelector(".modal-body");
-        const modalButton = document.querySelector(".modal button");
-
-        form.classList.toggle("d-flex")
-        form.classList.toggle("d-none");
-        modalBody.classList.add("bg-info");
-        modalLoading.classList.toggle("d-none");
-        modalButton.classList.toggle("d-none");
 
     }
 

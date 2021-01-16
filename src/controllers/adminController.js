@@ -3,20 +3,12 @@ const path = require("path");
 const usersPath = path.join(__dirname, "../database/users.json");
 const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
 const usersData = JSON.parse(usersDataJSON);
-const sessionsPath = path.join(__dirname, "../database/sessions.json");
-const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-const sessionsData = JSON.parse(sessionsDataJSON);
 const functions = require("../functions/admin");
 const bcrypt = require("bcrypt");
 const urlBaseApi = process.env.USERDOMAIN == "DESKTOP-O3O462B"
     ? process.env.URL_API_DEV
     : process.env.URL_API_PROD;
-const urlBaseApp =
-    process.env.USERDOMAIN == "DESKTOP-O3O462B"
-        ? process.env.URL_APP_DEV
-        : process.env.URL_APP_PROD;
 const key = `${process.env.MY_PASS}`;
-const token = bcrypt.hashSync(key, 10);
 
 module.exports = {
 
@@ -32,9 +24,7 @@ module.exports = {
 
             newUser[0].key = hashedKey;
 
-            usersData.push(newUser[0]);
-
-            fs.writeFileSync(usersPath, JSON.stringify(usersData, null, " "));
+            functions.createUser(newUser[0]);
 
             functions.setSession(newUser[0]);
 
@@ -51,35 +41,32 @@ module.exports = {
         }
     },
 
-    login: (req, res) => {
+    login: async (req, res) => {
         const admin = [];
         const password = req.body.password;
-        const sessionsAdmin = [];
 
-        sessionsData.map( session => {
-            session.status == "admin" && bcrypt.compareSync(key, session.key) ? sessionsAdmin.push(session) : ""
-        })
+        const findSession = await functions.getSession("admin");
 
-        if(sessionsAdmin.length){
-            admin.push(sessionsAdmin[sessionsAdmin.length - 1])
+        if(findSession){
+            findSession.session = true;
+            admin.push(findSession[0]);
         } else {
-            if (password == "") {
-                admin.push({ error: false, message: "No session!" });
-            } else {
-                usersData.map( user => {
-                    if(bcrypt.compareSync(password, user.password)) {
-                        user.status == "admin" ? user.token = token : ""
-                        admin.push(user);
-                        functions.setSession(user);
-                    } else {
-                        admin.push({
-                            error: true,
-                            field: "password",
-                            message: "Wrong Password!",
-                        });
-                    }
-                });
+            admin.push({ error: false, message: "No session!" });
+        }
+
+        if(!admin[0]){
+
+            const user = await functions.getUser(password);
+
+            if(!user[0].error){
+
+                user[0].session = true
+
+                admin.push(user[0]);
+
+                functions.setSession(user[0]);
             }
+
         }
 
         res.json({
@@ -92,28 +79,14 @@ module.exports = {
 
     updatePassword: async (req, res) => {
 
-        const user = [];
+        const user = await functions.getUser(req.body.oldpassword);
 
-        let userPositionOnDB;
-
-        usersData.map( userDB => {
-
-            if(bcrypt.compareSync(req.body.oldpassword, userDB.password)){
-                user.push(userDB)
-            }
-
-            userPositionOnDB = usersData.indexOf(user[0]);
-
-        });
+        const userPositionOnDB = usersData.indexOf(user[0]);
 
 
-        if(!user.length){
+        if(user[0].error){
 
-            user.push({
-                error: true,
-                field: "oldpassword",
-                message: "Wrong Password!",
-            })
+            user[0].field = "oldpassword"
 
         } else {
 
@@ -152,12 +125,12 @@ module.exports = {
 
     logout: async (req, res) => {
 
-        functions.closeSession(req.body);
+        await functions.closeSession(req.body);
 
         res.json({
             meta:{
                 status: 200,
-                url: `${urlBaseApp}`
+                message: "Session close!"
             }
         });
     },

@@ -3,45 +3,85 @@ const path = require("path");
 const pathPage = path.join(__dirname,"../database/dataproject.json");
 const dataPageJSON = fs.readFileSync(pathPage, {encoding: "utf-8"});
 const pageData = JSON.parse(dataPageJSON);
-const pathCanchaYhorario = path.join(__dirname,"../database/canchayhorario.json");
-const dataCanchaYhorarioJSON = fs.readFileSync(pathCanchaYhorario, {encoding: "utf-8"});
-const CanchaYhorarioData = JSON.parse(dataCanchaYhorarioJSON);
-const pathReserves = path.join(__dirname,"../database/reserves.json");
-const dataReservesJSON = fs.readFileSync(pathReserves, {encoding: "utf-8"});
-const ReservesData = JSON.parse(dataReservesJSON);
-const horariosOnDB = CanchaYhorarioData[0].options.map( option => { return option.horario}); // Array de horarios.
+
 const mainfunctions = require("../functions/main");
 const functions = require("../functions/reserves");
-const functionsAdmin = require("../functions/admin");
-const { modifyOneReserve } = require("../functions/reserves");
 
 module.exports = {
 
-    getReserves: async (req, res) => {
+    create: async (req, res) => {
+
+        if(req.body.cancha && req.body.horario){
+
+            // If validation failed, check if the schedule they send is already reserved.
+            const CanchaYhorarioData = functions.getCanchayhorario();
+            const {dataPage, horarios} = functions.getDataPage(pageData,CanchaYhorarioData);
+            const horarioToReserve = functions.getCanchayhorario(req.body.cancha, req.body.horario);
+            const options = functions.getOptionsResponseForm("already reserved");
+
+            horarioToReserve.reservado
+                ? res.render("index.ejs",{dataPage,horarios,CanchaYhorarioData,options})
+                : "";
+
+        }
+        // If the schedule its not reserved.
+        if(req.errors.length){
+            const CanchaYhorarioData = functions.getCanchayhorario();
+            const {dataPage, horarios} = functions.getDataPage(pageData,CanchaYhorarioData);
+            const options = functions.getOptionsResponseForm("sendReserve");
+
+            res.render("index.ejs", {dataPage,horarios,CanchaYhorarioData,options, errors: req.errors})
+        } else {
+            // Create a new reserve on reserves.json (Historys reserve)
+            const CanchaYhorarioData = functions.getCanchayhorario();
+            const {dataPage, horarios} = functions.getDataPage(pageData,CanchaYhorarioData);
+
+            const newreserve = functions.create(req.body);
+
+            let options = {};
+
+            if(!newreserve.error){
+                options =  functions.getOptionsResponseForm("succefull", newreserve)
+                const reserveConfirmationEmail = await mainfunctions.sendReserveConfirmByEmail(newreserve);
+                console.log(reserveConfirmationEmail)
+            } else {
+                options =  functions.getOptionsResponseForm("failed","",newreserve.message);
+            }
+
+            res.render("index.ejs",{dataPage,horarios,CanchaYhorarioData,options})
+        }
+
+    },
+
+    getReserves: (req, res) => {
+
+        const reserves = functions.getReserves();
 
         res.json({
             meta: {
                 status: 200
             },
-            data: ReservesData
+            data: reserves
         });
 
     },
 
-    getCanchaYhorario: async (req, res) => {
+    getCanchaYhorario: (req, res) => {
+
+        const canchayhorario = functions.getCanchayhorario();
 
         res.json({
             meta: {
                 status: 200
             },
-            data: CanchaYhorarioData
+            data: canchayhorario
         })
 
     },
 
-    getReservesByCanchaYhorario: async (req, res) => {
+    getReserveById: (req, res) => {
 
-        const reserve = ReservesData.find( reserve => reserve.id == Number(req.params.id));
+        const reserve = functions.getReserveById(req.params.id);
 
         res.json({
             meta: {
@@ -51,167 +91,75 @@ module.exports = {
         })
     },
 
-    modifyReserve: async (req, res) => {
+    modifyCanchayhorario: (req, res) => {
 
-        const cancha = req.body.cancha - 1;
-        const horarioPosition = horariosOnDB.indexOf(req.body.horario);
-
-        req.body.reserve
-            ? CanchaYhorarioData[cancha].options[horarioPosition].reservado = true
-            : CanchaYhorarioData[cancha].options[horarioPosition].reservado = false
-
-        await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
+        const modifyCanchayhorario = functions.modifyCanchayhorario(req.body.cancha, req.body.horario);
 
         res.json({
             meta: {
                 status: 200,
-                reserve: CanchaYhorarioData[cancha]
+                reserve: modifyCanchayhorario
             }
         })
 
     },
 
-    resetReserves: async (req, res) => {
-        CanchaYhorarioData.map(cancha => {
-            cancha.options.map(option => {
-                option.reservado = false
-            });
-        });
+    resetReserves: (req, res) => {
 
-        await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
+        const resetReserves = functions.modifyAllCanchayhorarios();
 
         res.json({
             meta: {
                 status: 200
             },
-            data: CanchaYhorarioData
+            data: resetReserves
         })
     },
 
-    reservesOfTheDay: async (req, res) => {
+    reservesOfTheDay: (req, res) => {
 
-        const date = functions.getDate();
-        const reserves = await ReservesData.filter(reserve => reserve.date.slice(0,10) == date);
+        const reservesoftheday = functions.getReservesOfTheDay();
 
         res.json({
             meta: {
                 statua: 200,
-                reserves: reserves.length
             },
-            data: reserves,
+            data: reservesoftheday,
         })
     },
 
     sendHistoryByEmail: async (req, res) => {
-        const historySent = await functions.sendHistoryByEmail(ReservesData);
+
+        const historySent = await functions.sendHistoryByEmail();
 
         res.json({
             meta: {
                 status: 200,
-                totalItems: ReservesData.length
             },
             data: historySent
 
         })
     },
 
-    create: async (req, res) => {
-
-        // console.log("req.errors: ",req.errors)
-
-        const {dataPage, horarios} = functions.getDataPage(pageData,CanchaYhorarioData);
-        const horarioPosition = horariosOnDB.indexOf(req.body.horario);
-
-        if(req.body.cancha && req.body.horario){
-
-            // Si falla la validacion, consulta si el horario que mandan ya esta reservado.
-            const horarioToReserve = CanchaYhorarioData[req.body.cancha - 1].options[horarioPosition].reservado;
-            const options = functions.getOptionsResponseForm("already reserved");
-
-            horarioToReserve == true
-                ? res.render("index.ejs",{dataPage,horarios,CanchaYhorarioData,options})
-                : "";
-
-        }
-
-        // Si el horario no esta reservado.
-        if(req.errors.length){
-            const options = functions.getOptionsResponseForm("sendReserve");
-            res.render("index.ejs", {dataPage,horarios,CanchaYhorarioData,options, errors: req.errors})
-        } else {
-
-            // Create a new reserve on reserves.json (Historys reserve)
-            let lastId = ReservesData.length == 0 ? id = 0 : pageData.reservas.total;
-
-            const newReserve = {
-                id: lastId + 1,
-                ...req.body,
-                date: functions.getDate()
-            }
-
-            ReservesData.push(newReserve);
-            pageData.reservas.total = pageData.reservas.total + 1;
-
-            const lastReserve = ReservesData[ReservesData.length - 1];
-
-            let options = {};
-
-            if(lastReserve.id == newReserve.id){
-
-                const reserveConfirmationEmail = await functions.sendReserveConfirmByEmail(newReserve);
-
-                await fs.writeFileSync(pathReserves, JSON.stringify(ReservesData,null," "));
-                await fs.writeFileSync(pathPage,JSON.stringify(pageData,null," "));
-
-                options =  functions.getOptionsResponseForm("succefull", lastReserve);
-
-            } else {
-                options =  functions.getOptionsResponseForm("failed")
-            }
-
-            // Reserve a cancha and horario on canchayhorario.json. (Reserves of the day)
-            CanchaYhorarioData[req.body.cancha - 1].options[horarioPosition].reservado = true;
-            CanchaYhorarioData[req.body.cancha - 1].options[horarioPosition].reserve_id = lastId + 1;
-
-             await fs.writeFileSync(pathCanchaYhorario, JSON.stringify(CanchaYhorarioData,null," "));
-
-
-            res.render("index.ejs",{dataPage,horarios,CanchaYhorarioData,options})
-        }
-    },
-
     delete: async (req, res) => {
 
         const id = Number(req.params.id)
-        let newArrayReserve = [];
+        const newArrayReserve = [];
         const errors = [];
 
-        if(id == 0){
+        const response = id == 0 ? await functions.delete(id, req.body.ids) : functions.delete(id,"");
 
-            const arrayWithObjectDeleted = await mainfunctions.deleteByArrayId(req.body.ids, ReservesData);
-
-            if(arrayWithObjectDeleted.errors.length){
-                errors.push(...arrayWithObjectDeleted.errors)
-            }
-
-            newArrayReserve = arrayWithObjectDeleted.data;
+        if(response[0].errors){
+            newArrayReserve.push(...response[0].data);
+            errors.push(...response[0].errors);
         } else {
-
-            const arrayWithObjectDeleted = await ReservesData.filter( reserve => reserve.id != id );
-
-            newArrayReserve = arrayWithObjectDeleted;
-
-            const canchayhorarioModified = functions.modifyOneCanchayhorarioById(id);
-
-            if (canchayhorarioModified.error){
-                errors.push(canchayhorarioModified)
-            }
+            newArrayReserve.push(...response);
         }
 
-        const response =  await mainfunctions.saveOnDB("reserves",newArrayReserve,id);
+        const canchayhorarioModified = functions.modifyOneCanchayhorarioById(id);
 
-        if(response){
-            errors.push(...response);
+        if (canchayhorarioModified.error){
+            errors.push(canchayhorarioModified)
         }
 
         res.json({

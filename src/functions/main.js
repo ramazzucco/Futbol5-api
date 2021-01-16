@@ -21,8 +21,33 @@ const pathSessions = path.join(__dirname,"../database/dataproject.json");
 const dataSessionsJSON = fs.readFileSync(pathSessions, {encoding: "utf-8"});
 const sessionsData = JSON.parse(dataSessionsJSON);
 
+const nodemailer = require("nodemailer");
+const HTMLemail = require("./reserveConfirmationEmail");
 
 module.exports = {
+
+    getDate: () => {
+        const date = new Date();
+        const fecha =
+            `${date.getDate()}` +
+            "-" +
+            `${date.getMonth() + 1}` +
+            "-" +
+            `${date.getFullYear()}`;
+        return fecha;
+    },
+
+    getTime: () => {
+
+        const date = new Date();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+
+        const time = `${hours}:${("0" + Math.floor(minutes)).slice(-2)}:${("0" + Math.floor(seconds)).slice(-2)}`
+
+        return time;
+    },
 
     saveOnDB: (saveIn, data, ids) => {
 
@@ -50,32 +75,30 @@ module.exports = {
 
         if(Array.isArray(ids)){
            ids.map( id => {
-               const elementFind = element.find( elem => elem.id == id)
+               const elementFind = element.find( elem => elem.id == id);
 
                if(elementFind != "undefined"){
-                    errors.push({ message: `Id ${id} was not deleted`, data: elem})
+                    errors.push({ message: `Id ${id} was not deleted`, data: elem });
                 }
             })
 
-            fs.writeFileSync(pathElement,JSON.stringify(data,null," "))
+            fs.writeFileSync(pathElement,JSON.stringify(data,null," "));
         } else {
-            const elementFind = element.find( elem => elem.id == ids)
+            const elementFind = element.find( elem => elem.id == ids);
 
             if(elementFind != "undefined"){
-                errors.push({ message: `Id ${ids} was not deleted`, data: elementFind})
+                errors.push({ message: `Id ${ids} was not deleted`, data: elementFind});
             }
 
-            fs.writeFileSync(pathElement,JSON.stringify(data,null," "))
+            fs.writeFileSync(pathElement,JSON.stringify(data,null," "));
         }
 
         return errors;
     },
 
-    deleteByArrayId: (ids, objectToDelete) => {
+    deleteByArrayId: async (ids, arrayWhithObjectToDelete) => {
 
-        const data = objectToDelete;
-
-        const errors = [];
+        const data = arrayWhithObjectToDelete;
 
         ids.forEach( async id => {
 
@@ -85,22 +108,55 @@ module.exports = {
                     const findReserve = data.find( reserve => reserve.id == id);
                     const positionIdOnReservesData = data.indexOf(findReserve);
 
-                    if(positionIdOnReservesData == -1){
-                        errors.push({error: true, message: `Reserve ${id} was not found`})
-                    }
-
-                    data.splice(positionIdOnReservesData, 1)
+                    data.splice(positionIdOnReservesData, 1);
                 }
 
             })
 
         });
 
-        return {
-            data: data,
-            errors: errors.length ? errors : false
-        };
+        return data;
     },
 
+    sendReserveConfirmByEmail: (data) => {
 
+        const response = [];
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+                user: "rsmazzucco@gmail.com",
+                pass: process.env.NODEMAILER_PASS,
+            },
+        });
+
+        const message = HTMLemail.getHTMLemail(data);
+
+        async function main(){
+
+            const info = await transporter.sendMail({
+                from: '"Reserva Exitosa" <rsmazzucco@gmail.com>',
+                to: `${data.email}`,
+                subject: "Reserva Exitosa!",
+                html: message
+            });
+
+            console.log("Message sent: %s", info.messageId);
+
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+            return info;
+        }
+
+        const sendEmailConfirmation = main().catch(error => { return error });
+
+        sendEmailConfirmation.Promise
+            ? response.push({error: true, message: "The sent email failed."})
+            : response.push(sendEmailConfirmation);
+
+
+        return response;
+    },
 }

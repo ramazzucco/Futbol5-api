@@ -1,30 +1,86 @@
 const fs = require("fs");
 const path = require("path");
+const usersPath = path.join(__dirname, "../database/users.json");
 const sessionsPath = path.join(__dirname, "../database/sessions.json");
-const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-const sessionsData = JSON.parse(sessionsDataJSON);
 
 const bcrypt = require("bcrypt");
 
 const developer = process.env.MY_PASS;
 
-const session = [];
-
 module.exports = {
+
+    createUser: async (user) => {
+        const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
+        const usersData = JSON.parse(usersDataJSON);
+
+        usersData.push(user);
+
+        await fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
+    },
+
+    getUser: (pass) => {
+        const userFind = [];
+        const key = `${process.env.MY_PASS}`;
+        const token = bcrypt.hashSync(key, 10);
+        const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
+        const usersData = JSON.parse(usersDataJSON);
+
+        usersData.map( user => {
+
+            if(bcrypt.compareSync(pass, user.password)) {
+
+                user.status == "admin" ? user.token = token : ""
+                userFind.push(user);
+
+            } else {
+
+                userFind.push({
+                    error: true,
+                    field: "password",
+                    message: "Wrong Password!",
+                });
+
+            }
+
+        })
+
+        return userFind;
+    },
+
     setSession: async (user) => {
+        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+        const sessionsData = JSON.parse(sessionsDataJSON);
         const findSession = sessionsData.find(session => session.password == user.password);
+
         findSession ? console.log("Ya existe la session") : sessionsData.push(user);
+
         await fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
     },
 
-    getSession: (user) => {
-        const getUserSession = sessionsData.find( u => u.password == user.password)
-        session.push(getUserSession);
+    getSession: (admin, user) => {
+        const session = [];
+        const key = `${process.env.MY_PASS}`;
+        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+        const sessionsData = JSON.parse(sessionsDataJSON);
+
+        if(admin != undefined){
+            const getUserSession = sessionsData.filter(
+                session => session.status == admin && bcrypt.compareSync(key, session.key)
+            );
+            session.push(getUserSession[getUserSession.length - 1]);
+        } else {
+            const getUserSession = sessionsData.find( session => session.password == user.password);
+            session.push(getUserSession);
+        }
+
         return session;
     },
 
     closeSession: (user) => {
+        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+        const sessionsData = JSON.parse(sessionsDataJSON);
         const sessionDeleted = sessionsData.filter(session => session.password != user.password);
+
         fs.writeFileSync(sessionsPath, JSON.stringify(sessionDeleted,null," "))
     }
 };

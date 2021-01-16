@@ -1,9 +1,9 @@
 {
  "reservas": {
-  "total": 81
+  "total": 103
  },
  "canchas": {
-  "cantidad": 4,
+  "cantidad": 3,
   "model": {
    "number": 4,
    "status": "incomplete",

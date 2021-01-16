@@ -16,10 +16,10 @@ router.post('/reservesoftheday', auth, controllers.reservesOfTheDay);
 
 router.post("/sendhistorybyemail", auth, controllers.sendHistoryByEmail);
 
-router.post('/reserve/:id', auth, controllers.getReservesByCanchaYhorario);
+router.post('/reserve/:id', auth, controllers.getReserveById);
 
 
-router.put('/modify', auth, controllers.modifyReserve);
+router.put('/modify', auth, controllers.modifyCanchayhorario);
 
 
 router.delete("/delete/:id", auth, controllers.delete);
