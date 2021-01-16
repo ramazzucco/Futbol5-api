@@ -59,17 +59,22 @@ module.exports = {
 
     getSession: (admin) => {
         const session = [];
-        const key = process.env.MY_PASS;
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
 
-        const getAdminSession = sessionsData.filter( session => {
-            console.log("compare key from sessionsdata.filter: ", bcrypt.compareSync(key, session.key))
-            session.status == admin && bcrypt.compareSync(key, session.key)
+        sessionsData.map( user => {
+            const mYkey = process.env.MY_PASS;
+            const admin = user.status == "admin" ? true : false;
+            const key = bcrypt.compareSync(mYkey, user.key);
+
+            console.log("admin & key from sessionsdata.filter: ", admin, key)
+
+            if(admin & key){
+                session.push(user)
+            }
         });
-        session.push(getAdminSession[getAdminSession.length - 1]);
         console.log("session from getSession: ", session)
-        return session;
+        return session[session.length - 1];
     },
 
     closeSession: (user) => {
