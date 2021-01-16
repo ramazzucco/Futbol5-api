@@ -45,30 +45,33 @@ module.exports = {
         const admin = [];
         const password = req.body.password;
 
-        const findSession = functions.getSession();
+        if(password != ""){
+            const findSession = functions.getSession();
 
-        console.log(findSession)
-
-        if(findSession == undefined){
-            admin.push(findSession[0]);
+            findSession == "undefined"
+                ? admin.push({ error: false, message: "No session!" })
+                : admin.push(findSession[0]);
         } else {
 
-            if(password != ""){
 
-                const user = functions.getUser(password);
+            const user = functions.getUser(password);
 
-                if(!user[0].error){
+            if(!user[0].error){
 
-                    user[0].session = true
+                user[0].session = true
 
-                    admin.push(user[0]);
+                admin.push(user[0]);
 
-                    functions.setSession(user[0]);
-                }
-
+                functions.setSession(user[0]);
             } else {
-                admin.push({ error: false, message: "No session!" });
+
+                admin.push({
+                    error: true,
+                    field: "password",
+                    message: "Wrong password!"
+                })
             }
+
         }
 
 
