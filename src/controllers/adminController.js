@@ -45,7 +45,7 @@ module.exports = {
         const admin = [];
         const password = req.body.password;
 
-        if(password != ""){
+        if(password == ""){
             const findSession = functions.getSession();
 
             findSession == "undefined"
