@@ -45,7 +45,7 @@ module.exports = {
         const admin = [];
         const password = req.body.password;
 
-        const findSession = functions.getSession("admin");
+        const findSession = functions.getSession();
 
         console.log(findSession)
 

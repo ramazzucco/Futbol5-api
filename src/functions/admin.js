@@ -57,13 +57,13 @@ module.exports = {
         fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
     },
 
-    getSession: (admin) => {
+    getSession: () => {
         const session = [];
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
 
         sessionsData.map( user => {
-            const mYkey = process.env.MY_PASS;
+            const mYkey = `${process.env.MY_PASS}`;
             const admin = user.status == "admin" ? true : false;
             const key = bcrypt.compareSync(mYkey, user.key);
 
