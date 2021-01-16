@@ -9,13 +9,13 @@ const developer = process.env.MY_PASS;
 
 module.exports = {
 
-    createUser: async (user) => {
+    createUser: (user) => {
         const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
         const usersData = JSON.parse(usersDataJSON);
 
         usersData.push(user);
 
-        await fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
+        fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
     },
 
     getUser: (pass) => {
@@ -47,14 +47,14 @@ module.exports = {
         return userFind;
     },
 
-    setSession: async (user) => {
+    setSession: (user) => {
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
         const findSession = sessionsData.find(session => session.password == user.password);
 
         findSession ? console.log("Ya existe la session") : sessionsData.push(user);
 
-        await fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
+        fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
     },
 
     getSession: (admin, user) => {

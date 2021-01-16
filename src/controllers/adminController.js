@@ -41,11 +41,11 @@ module.exports = {
         }
     },
 
-    login: async (req, res) => {
+    login: (req, res) => {
         const admin = [];
         const password = req.body.password;
 
-        const findSession = await functions.getSession("admin");
+        const findSession = functions.getSession("admin");
 
         if(findSession){
             findSession.session = true;
@@ -56,7 +56,7 @@ module.exports = {
 
         if(!admin[0]){
 
-            const user = await functions.getUser(password);
+            const user = functions.getUser(password);
 
             if(!user[0].error){
 
@@ -77,9 +77,9 @@ module.exports = {
         });
     },
 
-    updatePassword: async (req, res) => {
+    updatePassword: (req, res) => {
 
-        const user = await functions.getUser(req.body.oldpassword);
+        const user = functions.getUser(req.body.oldpassword);
 
         const userPositionOnDB = usersData.indexOf(user[0]);
 
@@ -100,7 +100,7 @@ module.exports = {
 
                 user.push(usersData[userPositionOnDB]);
 
-                await fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "))
+                fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "))
 
             } else {
 
@@ -123,9 +123,9 @@ module.exports = {
         });
     },
 
-    logout: async (req, res) => {
+    logout: (req, res) => {
 
-        await functions.closeSession(req.body);
+        functions.closeSession(req.body);
 
         res.json({
             meta:{
