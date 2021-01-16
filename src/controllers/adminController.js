@@ -15,29 +15,44 @@ module.exports = {
     create: (req, res) => {
         req.errors ? req.errors[0].error = true : "";
         const newUser = req.errors ? req.errors : [req.body];
-        const passwordHash = bcrypt.hashSync(req.body.password, 10);
-        newUser[0].password = passwordHash;
 
-        if(newUser[0].status == "admin" && key == newUser[0].key){
+        if(!req.errors[0].error){
 
-            const hashedKey = bcrypt.hashSync(newUser[0].key, 10);
+            const passwordHash = bcrypt.hashSync(req.body.password, 10);
+            newUser[0].password = passwordHash;
 
-            newUser[0].key = hashedKey;
+            if(newUser[0].status == "admin" && key == newUser[0].key){
 
-            functions.createUser(newUser[0]);
+                const hashedKey = bcrypt.hashSync(newUser[0].key, 10);
 
-            functions.setSession(newUser[0]);
+                newUser[0].key = hashedKey;
+
+                functions.createUser(newUser[0]);
+
+                functions.setSession(newUser[0]);
+
+                res.json({
+                    meta: {
+                        status: 200,
+                        message: "Admin created succefully!",
+                    },
+                    data: newUser[0]
+                })
+
+            } else {
+                res.redirect(`${urlBaseApi}`);
+            }
+        } else {
 
             res.json({
                 meta: {
                     status: 200,
                     message: "Admin created succefully!",
                 },
-                data: newUser[0]
+                data: newUser
             })
 
-        } else {
-            res.redirect(`${urlBaseApi}`);
+
         }
     },
 
