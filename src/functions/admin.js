@@ -25,24 +25,31 @@ module.exports = {
         const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
         const usersData = JSON.parse(usersDataJSON);
 
-        usersData.map( user => {
+        if(usersData.length){
+            usersData.map( user => {
 
-            if(bcrypt.compareSync(pass, user.password)) {
+                if(bcrypt.compareSync(pass, user.password)) {
 
-                user.status == "admin" ? user.token = token : ""
-                userFind.push(user);
+                    user.status == "admin" ? user.token = token : ""
+                    userFind.push(user);
 
-            } else {
+                } else {
 
-                userFind.push({
-                    error: true,
-                    field: "password",
-                    message: "Wrong Password!",
-                });
+                    userFind.push({
+                        error: true,
+                        field: "password",
+                        message: "Wrong Password!",
+                    });
 
-            }
+                }
 
-        })
+            })
+        } else {
+            userFind.push({
+                error: true,
+                users: false,
+            });
+        }
 
         return userFind;
     },

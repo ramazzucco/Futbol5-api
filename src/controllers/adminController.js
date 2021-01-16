@@ -53,7 +53,6 @@ module.exports = {
                 : admin.push(findSession[0]);
         } else {
 
-
             const user = functions.getUser(password);
 
             if(!user[0].error){
@@ -65,6 +64,9 @@ module.exports = {
                 functions.setSession(user[0]);
             } else {
 
+                if(!user[0].users){
+                    user.length = 0;
+                }
                 admin.push({
                     error: true,
                     field: "password",
