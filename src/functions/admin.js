@@ -63,7 +63,7 @@ module.exports = {
         const sessionsData = JSON.parse(sessionsDataJSON);
 
         sessionsData.map( user => {
-            const mYkey = `${process.env.MY_PASS}`;
+            const mYkey = "Hb%&P4u7#.X3mW_vM";
             const admin = user.status == "admin" ? true : false;
             const key = bcrypt.compareSync(mYkey, user.token);
 
