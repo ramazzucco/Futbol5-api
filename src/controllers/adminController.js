@@ -49,7 +49,7 @@ module.exports = {
 
         console.log(findSession)
 
-        if(findSession){
+        if(findSession[0]){
             admin.push(findSession[0]);
         } else {
 
