@@ -64,7 +64,7 @@ module.exports = {
         const sessionsData = JSON.parse(sessionsDataJSON);
 
         const getAdminSession = sessionsData.filter( session => {
-            console.log("session from sessionsdataJSON: ", session)
+            console.log("compare key from sessionsdata.filter: ", bcrypt.compareSync(key, session.key))
             session.status == admin && bcrypt.compareSync(key, session.key)
         });
         session.push(getAdminSession[getAdminSession.length - 1]);
