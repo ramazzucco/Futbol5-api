@@ -52,23 +52,25 @@ module.exports = {
         if(findSession){
             admin.push(findSession[0]);
         } else {
-            admin.push({ error: false, message: "No session!" });
-        }
 
-        if(!admin[0]){
+            if(password != ""){
 
-            const user = functions.getUser(password);
+                const user = functions.getUser(password);
 
-            if(!user[0].error){
+                if(!user[0].error){
 
-                user[0].session = true
+                    user[0].session = true
 
-                admin.push(user[0]);
+                    admin.push(user[0]);
 
-                functions.setSession(user[0]);
+                    functions.setSession(user[0]);
+                }
+
+            } else {
+                admin.push({ error: false, message: "No session!" });
             }
-
         }
+
 
         res.json({
             meta: {
