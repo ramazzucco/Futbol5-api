@@ -67,7 +67,7 @@ module.exports = {
             const admin = user.status == "admin" ? true : false;
             const key = bcrypt.compareSync(mYkey, user.token);
 
-            console.log("admin & key from sessionsdata.filter: ", admin, key)
+            console.log("admin & key from sessionsdata.filter: ", admin, mYkey)
 
             if(admin & key){
                 session.push(user)
