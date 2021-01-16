@@ -50,7 +50,6 @@ module.exports = {
         console.log(findSession)
 
         if(findSession){
-            findSession.session = true;
             admin.push(findSession[0]);
         } else {
             admin.push({ error: false, message: "No session!" });

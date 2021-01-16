@@ -65,7 +65,7 @@ module.exports = {
         sessionsData.map( user => {
             const mYkey = `${process.env.MY_PASS}`;
             const admin = user.status == "admin" ? true : false;
-            const key = bcrypt.compareSync(mYkey, user.key);
+            const key = bcrypt.compareSync(mYkey, user.token);
 
             console.log("admin & key from sessionsdata.filter: ", admin, key)
 
