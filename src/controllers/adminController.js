@@ -43,11 +43,11 @@ module.exports = {
                 res.redirect(`${urlBaseApi}`);
             }
         } else {
-
+            console.log(newUser)
             res.json({
                 meta: {
-                    status: 200,
-                    message: "Admin created succefully!",
+                    status: 300,
+                    message: "Error!",
                 },
                 data: newUser
             })
