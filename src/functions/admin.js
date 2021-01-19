@@ -9,21 +9,54 @@ const developer = process.env.MY_PASS;
 
 module.exports = {
 
-    createUser: (user) => {
+    create: (user) => {
         const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
         const usersData = JSON.parse(usersDataJSON);
+        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+        const sessionsData = JSON.parse(sessionsDataJSON);
 
-        usersData.push(user);
+        const response = [];
 
-        fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
+        const userFind = usersData.find( userDB => userDB.name == user.name && userDB.lastname == user.lastname );
+
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", userFind)
+        if(userFind){
+            response.push({error: true, field: "key", message: "There is already a user with that first and last name!"});
+        } else {
+
+            const passwordHash = bcrypt.hashSync(user.password, 10);
+            const keyHash = bcrypt.hashSync(user.key, 10);
+            const token = bcrypt.hashSync(user.key, 12);
+
+            user.password = passwordHash;
+            user.key = keyHash;
+            usersData.push(user);
+
+            fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
+
+            user.session = true;
+            user.token = token;
+            sessionsData.push(user)
+
+            fs.writeFileSync(sessionsPath,JSON.stringify(sessionsData,null," "));
+
+            response.push(user);
+
+        }
+
+        return response[0];
     },
 
     getUser: (pass) => {
-        const userFind = [];
-        const key = `${process.env.MY_PASS}`;
-        const token = bcrypt.hashSync(key, 10);
         const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
         const usersData = JSON.parse(usersDataJSON);
+
+        const key = `${process.env.MY_PASS}`;
+        const token = bcrypt.hashSync(key, 12);
+        const response = {
+            error: "",
+            data: {}
+        };
 
         if(usersData.length){
             usersData.map( user => {
@@ -31,57 +64,79 @@ module.exports = {
                 if(bcrypt.compareSync(pass, user.password)) {
 
                     user.status == "admin" ? user.token = token : ""
-                    userFind.push(user);
+                    response.error = false;
+                    response.data = user;
 
                 } else {
 
-                    userFind.push({
+                    response.error = true;
+                    response.data = {
                         error: true,
                         field: "password",
                         message: "Wrong Password!",
-                    });
+                    };
 
                 }
 
             })
         } else {
-            userFind.push({
+
+            response.error = true;
+            response.data = {
                 error: true,
                 users: false,
-            });
+                data: {
+                    error: true,
+                    field: "password",
+                    message: "Wrong Password!",
+                }
+            };
+
         }
 
-        return userFind;
+        return response;
     },
 
     setSession: (user) => {
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
+
         const findSession = sessionsData.find(session => session.password == user.password);
 
-        findSession ? console.log("Ya existe la session") : sessionsData.push(user);
+        findSession ? console.log("Ya existe la session") : user.session = true;
+
+        sessionsData.push(user);
 
         fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
+
     },
 
     getSession: () => {
-        const session = [];
         const key = `${process.env.MY_PASS}`;
         const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
         const sessionsData = JSON.parse(sessionsDataJSON);
+        const response = {
+            error:"",
+            data: {}
+        };
 
-        sessionsData.map( user => {
-            const admin = user.status == "admin" ? true : false;
-            const auth = bcrypt.compareSync(key, user.token);
+        if(sessionsData.length){
 
-            console.log("admin & key from sessionsdata.filter: ", admin, mYkey)
+            sessionsData.map( user => {
 
-            if(admin & auth){
-                session.push(user)
-            }
-        });
-        console.log("session from getSession: ", session)
-        return session[session.length - 1];
+                if(bcrypt.compareSync(key, user.token)){
+                    response.error = false;
+                    response.data = user;
+                }
+
+            });
+
+        } else {
+            response.error = true;
+            response.data = {error: true, message: "No sessions!"};
+        }
+
+        return response;
     },
 
     closeSession: (user) => {

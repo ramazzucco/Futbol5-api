@@ -13,80 +13,82 @@ const key = `${process.env.MY_PASS}`;
 module.exports = {
 
     create: (req, res) => {
-        req.errors ? req.errors[0].error = true : "";
-        const newUser = req.errors ? req.errors : [req.body];
 
-        if(!req.errors[0].error){
+        const response = {
+            status: "",
+            error: "",
+            data: {}
+        }
+console.log("ERRORES: ",req.errors)
+        if(!req.errors){
 
-            const passwordHash = bcrypt.hashSync(req.body.password, 10);
-            newUser[0].password = passwordHash;
+            response.error = false
 
-            if(newUser[0].status == "admin" && key == newUser[0].key){
+            const userCreated = functions.create(req.body);
 
-                const hashedKey = bcrypt.hashSync(newUser[0].key, 10);
+            userCreated && userCreated.error
+                ? response.error = true
+                : response.error = false;
+            userCreated && userCreated.error
+                ? response.status = 300
+                : response.status = 200;
 
-                newUser[0].key = hashedKey;
+            response.data = userCreated;
 
-                functions.createUser(newUser[0]);
-
-                functions.setSession(newUser[0]);
-
-                res.json({
-                    meta: {
-                        status: 200,
-                        message: "Admin created succefully!",
-                    },
-                    data: newUser[0]
-                })
-
-            } else {
-                res.redirect(`${urlBaseApi}`);
-            }
         } else {
-            console.log(newUser)
-            res.json({
-                meta: {
-                    status: 300,
-                    message: "Error!",
-                },
-                data: newUser
-            })
 
+            response.error = true;
+            response.status = 300;
+            response.data = req.errors;
 
         }
+
+        res.json({
+            meta: {
+                status: response.status
+            },
+            error: response.error,
+            data: response.data
+        })
     },
 
     login: (req, res) => {
-        const admin = [];
+
         const password = req.body.password;
+        const response = {
+            status: "",
+            error: false,
+            data: {}
+        }
 
         if(password == ""){
+
             const findSession = functions.getSession();
+
             console.log(findSession)
-            findSession == undefined
-                ? admin.push({ error: false, message: "No session!" })
-                : admin.push(findSession[0]);
+            findSession.error
+                ? response.status = 300
+                : response.status = 200;
+
+            response.data = findSession.data
+
         } else {
 
             const user = functions.getUser(password);
 
-            if(!user[0].error){
+            if(!user.error){
 
-                user[0].session = true
+                functions.setSession(user.data);
 
-                admin.push(user[0]);
+                response.status = 200;
+                response.error = false;
+                response.data = user.data;
 
-                functions.setSession(user[0]);
             } else {
 
-                if(!user[0].users){
-                    user.length = 0;
-                }
-                admin.push({
-                    error: true,
-                    field: "password",
-                    message: "Wrong password!"
-                })
+                response.status = 300;
+                response.error = true;
+                response.data = user.data
             }
 
         }
@@ -94,9 +96,10 @@ module.exports = {
 
         res.json({
             meta: {
-                status: 200,
+                status: response.status,
             },
-            data: admin,
+            error: response.error,
+            data: response.data,
         });
     },
 

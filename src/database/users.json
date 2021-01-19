@@ -1,3 +1,9 @@
 [
- 
+ {
+  "name": "Usuario ",
+  "lastname": "Invitado",
+  "password": "$2b$10$8QbZ8MKKPbahTguvYtDI3OgctAdGqpjW93AvPIiofJVYGn.szUsRK",
+  "status": "admin",
+  "key": "$2b$10$Hp1/xPdVx9.XYQNDFw8RQOPwiLIi4TU5JhUrQRNh5.evjbNCJcHze"
+ }
 ]

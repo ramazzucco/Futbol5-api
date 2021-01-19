@@ -42,7 +42,7 @@ module.exports = (req, res, next) =>  {
     password == "" ? error.push({field: "password", message: "Campo obligatorio"}) : ""
     password.length < 8 || password.length > 15 ? error.push({field: "password", message: "Minimo 8 caracteres, Maximo 15 caracteres"}) : ""
 
-    // -----------Validacion del campo password.
+    // -----------Validacion del campo key.
     const key = req.body.key.trim();
 
     key == "" ? error.push({field: "key", message: "Campo obligatorio"}) : ""
