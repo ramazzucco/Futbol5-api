@@ -256,7 +256,7 @@ module.exports = {
 
         const response = [];
 
-        if(id == 0){
+        if(arrayId){
             const arrayWithObjectDeleted = await mainfunctions.deleteByArrayId(arrayId, ReservesData);
             const errors = [];
 
@@ -275,7 +275,9 @@ module.exports = {
             }
 
             fs.writeFileSync(pathReserves,JSON.stringify(ReservesData,null," "));
-        } else {
+        }
+
+        if(id > 0){
 
             const arrayWithObjectDeleted = ReservesData.filter( reserve => reserve.id != id );
 

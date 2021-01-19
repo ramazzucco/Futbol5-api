@@ -1,15 +1,5 @@
 [
  {
-  "id": 64,
-  "cancha": 1,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "11-1-2021"
- },
- {
   "id": 65,
   "cancha": 3,
   "horario": "21:00",

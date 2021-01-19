@@ -147,7 +147,7 @@ module.exports = {
         const newArrayReserve = [];
         const errors = [];
 
-        const response = id == 0 ? await functions.delete(id, req.body.ids) : functions.delete(id,"");
+        const response = id == 0 ? await functions.delete(id, req.body.ids) : await functions.delete(id,"");
 
         if(response[0].errors){
             newArrayReserve.push(...response[0].data);
