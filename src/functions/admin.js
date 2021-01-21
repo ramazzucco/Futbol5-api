@@ -103,9 +103,12 @@ module.exports = {
 
         const findSession = sessionsData.find(session => session.password == user.password);
 
-        findSession ? console.log("Ya existe la session") : user.session = true;
-
-        sessionsData.push(user);
+        if(findSession){
+            console.log("Ya existe la session")
+        } else {
+            user.session = true;
+            sessionsData.push(user);
+        }
 
         fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
 

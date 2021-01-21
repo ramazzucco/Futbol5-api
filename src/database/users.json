@@ -5,5 +5,12 @@
   "password": "$2b$10$8QbZ8MKKPbahTguvYtDI3OgctAdGqpjW93AvPIiofJVYGn.szUsRK",
   "status": "admin",
   "key": "$2b$10$Hp1/xPdVx9.XYQNDFw8RQOPwiLIi4TU5JhUrQRNh5.evjbNCJcHze"
+ },
+ {
+  "name": "Ramiro",
+  "lastname": "Mazzucco",
+  "password": "$2b$10$ok0CwT4NXsCkKM/KWg.ndeZFjk0FkTFcmY.N3aHzCyzhxot6uwfh.",
+  "status": "admin",
+  "key": "$2b$10$MnI.YvDNTcrgbEXpZ0gwRu8jXje2f.oJtMp0XtdX6ZqsF2xjs9o9i"
  }
 ]

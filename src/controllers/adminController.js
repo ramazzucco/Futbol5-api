@@ -73,7 +73,6 @@ console.log("ERRORES: ",req.errors)
             response.data = findSession.data
 
         } else {
-
             const user = functions.getUser(password);
 
             if(!user.error){
