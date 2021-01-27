@@ -19,7 +19,7 @@ module.exports = {
             error: "",
             data: {}
         }
-console.log("ERRORES: ",req.errors)
+
         if(!req.errors){
 
             response.error = false
@@ -106,12 +106,15 @@ console.log("ERRORES: ",req.errors)
 
         const user = functions.getUser(req.body.oldpassword);
 
-        const userPositionOnDB = usersData.indexOf(user[0]);
+        const token = user.data.token;
 
+        delete user.data.token
 
-        if(user[0].error){
+        const userPositionOnDB = functions.getUserPosition(user.data);
 
-            user[0].field = "oldpassword"
+        if(user.error){
+
+            user.data.field = "oldpassword"
 
         } else {
 
@@ -121,21 +124,19 @@ console.log("ERRORES: ",req.errors)
 
                 usersData[userPositionOnDB].password = passwordHash;
 
-                user.length = 0;
+                user.data = usersData[userPositionOnDB];
 
-                user.push(usersData[userPositionOnDB]);
+                fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
 
-                fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "))
+                user.data.token = token;
 
             } else {
 
-                user.length = 0;
-
-                user.push({
+                user.data = {
                     error: true,
                     field: "repeatnewpassword",
                     message: "New Password dosn`t match!"
-                })
+                }
 
             }
         }
@@ -144,7 +145,7 @@ console.log("ERRORES: ",req.errors)
             meta:{
                 status: 200
             },
-            data: user
+            data: user.data
         });
     },
 

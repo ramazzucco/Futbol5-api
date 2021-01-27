@@ -4,6 +4,7 @@ const usersPath = path.join(__dirname, "../database/users.json");
 const sessionsPath = path.join(__dirname, "../database/sessions.json");
 
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 const developer = process.env.MY_PASS;
 
@@ -19,7 +20,6 @@ module.exports = {
 
         const userFind = usersData.find( userDB => userDB.name == user.name && userDB.lastname == user.lastname );
 
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", userFind)
         if(userFind){
             response.push({error: true, field: "key", message: "There is already a user with that first and last name!"});
         } else {
@@ -45,6 +45,20 @@ module.exports = {
         }
 
         return response[0];
+    },
+
+    getUserPosition: (user) => {
+        const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
+        const usersData = JSON.parse(usersDataJSON);
+
+        const positionFind = usersData.map( u => {
+            if(u.password == user.password){
+                return usersData.indexOf(u)
+            }
+        })
+        const position = positionFind.filter( positionUser => positionUser != undefined );
+
+        return position[0];
     },
 
     getUser: (pass) => {

@@ -122,11 +122,11 @@ module.exports = {
         const date = mainfunctions.getDate();
         const reservesoftheday = ReservesData.filter(reserve => reserve.date.slice(0,10) == date);
 
-        reservesoftheday
+        reservesoftheday.length
             ? response.push(...reservesoftheday)
-            : response.push({error: true, message: "No reservation today!"},...ReservesData);
+            : response.push({error: true, message: "No reservation today!"});
 
-        return response;
+            return response;
     },
 
     getDataPage: (data, data2) => {

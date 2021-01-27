@@ -14,6 +14,8 @@ router.post('/canchaYhorario', auth, controllers.getCanchaYhorario);
 
 router.post('/reservesoftheday', auth, controllers.reservesOfTheDay);
 
+router.post("/newreserve", auth, validationForm, controllers.newReserve);
+
 router.post("/sendhistorybyemail", auth, controllers.sendHistoryByEmail);
 
 router.post('/reserve/:id', auth, controllers.getReserveById);

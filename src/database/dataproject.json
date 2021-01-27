@@ -1,6 +1,6 @@
 {
  "reservas": {
-  "total": 103
+  "total": 112
  },
  "canchas": {
   "cantidad": 3,
@@ -49,6 +49,12 @@
      "reservado": false,
      "cancha": 4,
      "reserve_id": ""
+    },
+    {
+     "horario": "22:00",
+     "reservado": false,
+     "cancha": "",
+     "reserve_id": ""
     }
    ]
   }
@@ -60,7 +66,8 @@
   "18:00",
   "19:00",
   "20:00",
-  "21:00"
+  "21:00",
+  "22:00"
  ],
  "horarios_model": {
   "horario": "00:00",

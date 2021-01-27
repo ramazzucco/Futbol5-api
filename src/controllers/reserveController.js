@@ -79,6 +79,34 @@ module.exports = {
 
     },
 
+    newReserve: (req, res) => {
+
+        delete req.body.user
+
+        if(req.errors.length){
+
+            res.json({
+                meta: {
+                    status: 300
+                },
+                data: req.errors
+            })
+
+        } else {
+
+            const newreserve = functions.create(req.body);
+
+            res.json({
+                meta: {
+                    status: 200
+                },
+                data: newreserve
+            })
+
+        }
+
+    },
+
     getReserveById: (req, res) => {
 
         const reserve = functions.getReserveById(req.params.id);
