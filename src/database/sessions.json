@@ -1,11 +1,3 @@
 [
- {
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "password": "$2b$10$wogsfYpBkNNxeDlYRVlUsuSQUj/wKDzjsQovuLCP9VnsmcJWfaNJS",
-  "status": "admin",
-  "key": "$2b$10$MnI.YvDNTcrgbEXpZ0gwRu8jXje2f.oJtMp0XtdX6ZqsF2xjs9o9i",
-  "token": "$2b$12$yUA5xjqMK39/E.VGIk0hcuUCdQz4F3rX03dW.TUcu8bF1Xk5153Ei",
-  "session": true
- }
+ 
 ]

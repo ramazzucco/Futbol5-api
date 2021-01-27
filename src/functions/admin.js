@@ -137,7 +137,7 @@ module.exports = {
             data: {}
         };
 
-        if(sessionsData.length){
+        if(sessionsData.length != 0){
 
             sessionsData.map( user => {
 
