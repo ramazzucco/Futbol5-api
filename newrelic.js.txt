@@ -65,5 +65,5 @@ exports.config = {
       'response.headers.setCookie*',
       'response.headers.x*'
     ]
-  }
+  },
 }

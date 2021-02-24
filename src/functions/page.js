@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { options } = require("../app");
 
 const pathpage = path.join(__dirname,"../database/dataproject.json");
 const pathCanchaYhorario = path.join(__dirname,"../database/canchayhorario.json");
@@ -22,11 +21,13 @@ module.exports = {
 
     modifyCancha: (amountToModify) => {
 
+        const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+        const pageData = JSON.parse(dataPageJSON);
+
         const response = [];
 
         if(amountToModify < 0){
-            const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
-            const pageData = JSON.parse(dataPageJSON);
+
             const dataCanchaYhorarioJSON = fs.readFileSync(pathCanchaYhorario, {encoding: "utf-8"});
             const CanchaYhorarioData = JSON.parse(dataCanchaYhorarioJSON);
 
@@ -53,8 +54,7 @@ module.exports = {
         if(amountToModify > 0){
 
             for(let i=0; i < amountToModify; i++){
-                const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
-                const pageData = JSON.parse(dataPageJSON);
+
                 const dataCanchaYhorarioJSON = fs.readFileSync(pathCanchaYhorario, {encoding: "utf-8"});
                 const CanchaYhorarioData = JSON.parse(dataCanchaYhorarioJSON);
 
@@ -92,7 +92,7 @@ module.exports = {
 
         const response = [];
 
-        if(action == "Agregar"){
+        if(action == "agregar"){
 
             const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
             const pageData = JSON.parse(dataPageJSON);
@@ -191,4 +191,152 @@ module.exports = {
         return response[0];
     },
 
+    modifySection: (data) => {
+        const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+        const pageData = JSON.parse(dataPageJSON);
+
+        const response = [];
+console.log(data)
+        switch (data.section) {
+            case "home":
+                if(data.text){
+                    pageData.page.section.home.text = data.text
+                }
+
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+                const dataHomeJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+                const dataHome = JSON.parse(dataHomeJSON);
+
+                response.push(dataHome);
+                break;
+            case "instalaciones":
+                if(data.canchas){
+                    pageData.page.section.instalaciones.canchas = data.canchas;
+                }
+                if (data.vestuarios){
+                    pageData.page.section.instalaciones.vesturarios = `${data.vestuarios}`;
+                }
+                if(data.parrillasybar){
+                    pageData.page.section.instalaciones.parrillasybar = `${data.parrillasybar}`;
+                }
+
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+                const dataInstalacionesJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+                const dataInstalaciones = JSON.parse(dataInstalacionesJSON);
+
+                response.push(dataInstalaciones);
+                break;
+            case "cumpleaños":
+                if(data.cumpleaños){
+                    pageData.page.section.cumpleaños = data.cumpleaños
+                }
+
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+                const dataCumpleañosJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+                const dataCumpleaños = JSON.parse(dataCumpleañosJSON);
+
+                response.push(dataCumpleaños);
+                break;
+            case "escuelita":
+                if(data.escuelita){
+                    pageData.page.section.escuelita = data.escuelita
+                }
+
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+                const dataEscuelitaJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+                const dataEscuelita = JSON.parse(dataEscuelitaJSON);
+
+                response.push(dataEscuelita);
+                break;
+            case "promociones":
+                const promotions = pageData.page.section.promociones.datos;
+
+                if(promotions.length == 0){
+                    data.promos.map( promo => {
+                        pageData.page.section.promociones.datos.push(promo);
+                    })
+                }
+
+                if(promotions.length > 0){
+                    data.promos.map( promo => {
+                        if(promo.numero){
+                            pageData.page.section.promociones.datos[promo.numero - 1].titulo = promo.titulo
+                        } else {
+                            const findpromo = pageData.page.section.promociones.datos.find( p => p.titulo == promo.titulo )
+                            console.log(findpromo)
+                            pageData.page.section.promociones.datos[findpromo.numero - 1].descripcion = promo.descripcion;
+                        }
+                    })
+                }
+
+                fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+                const dataPromocionesJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+                const dataPromociones = JSON.parse(dataPromocionesJSON);
+
+                response.push(dataPromociones);
+                break;
+            default:
+                break;
+        }
+
+        return response[0];
+    },
+
+    modifyFooter: (data) => {
+        const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+        const pageData = JSON.parse(dataPageJSON);
+
+        const response = [];
+
+        if(data.section == "redes sociales"){
+            data.redessociales.map( (redes, i) => {
+                pageData.page.footer.redessociales.map( redesDB => {
+                    if(redes.titulo == redesDB.nombre){
+                        pageData.page.footer.redessociales[i].nombre = redes.titulo;
+                        pageData.page.footer.redessociales[i].url = redes.url;
+                    }
+                })
+            })
+
+            fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+            const dataRedesJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+            const dataRedes = JSON.parse(dataRedesJSON);
+
+            response.push(dataRedes);
+        }
+
+        if(data.section == "contacto"){
+
+            if(data.direccion){
+                pageData.page.footer.contacto[0].data = data.direccion;
+            }
+
+            if(data.telefono){
+                pageData.page.footer.contacto[1].data = data.telefono;
+            }
+
+            if(data.whatsapp){
+                pageData.page.footer.contacto[2].data = data.whatsapp;
+            }
+
+            if(data.email){
+                pageData.page.footer.contacto[3].data = data.email;
+            }
+
+            fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
+
+            const dataContactoJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
+            const dataContacto = JSON.parse(dataContactoJSON);
+
+            response.push(dataContacto);
+        }
+
+        return response[0];
+    },
 }

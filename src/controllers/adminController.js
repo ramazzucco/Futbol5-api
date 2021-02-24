@@ -53,7 +53,7 @@ module.exports = {
     },
 
     login: (req, res) => {
-
+console.log(req.body)
         const password = req.body.password;
         const response = {
             status: "",

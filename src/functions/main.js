@@ -96,6 +96,17 @@ module.exports = {
         return errors;
     },
 
+    saveDataProject: (data) => {
+
+        const dataPage = [pageData];
+
+        dataPage.splice(0,1,data)
+
+        fs.writeFileSync(pathPage,JSON.stringify(dataPage[0],null," "));
+
+        return dataPage[0];
+    },
+
     deleteByArrayId: async (ids, arrayWhithObjectToDelete) => {
 
         const data = arrayWhithObjectToDelete;

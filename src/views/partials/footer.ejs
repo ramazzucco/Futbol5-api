@@ -10,9 +10,9 @@
             </div>
             <div class="info h-75">
                 <h6 class="text-uppercase">Contacto</h6>
-                <ul class="border-top border-bottom border-dark py-3">
+                <ul class="border-top border-bottom border-dark text-capitalize py-3">
                    <% for(element of footer.contacto) { %>
-                        <li><%= element %> </li>
+                        <li><%= element.title %>: <%= element.data %> </li>
                     <% } %>
                 </ul>
             </div>

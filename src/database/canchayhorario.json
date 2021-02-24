@@ -44,12 +44,6 @@
     "reservado": false,
     "cancha": 1,
     "reserve_id": ""
-   },
-   {
-    "horario": "22:00",
-    "reservado": false,
-    "cancha": 1,
-    "reserve_id": ""
    }
   ]
  },
@@ -98,12 +92,6 @@
     "reservado": false,
     "cancha": 2,
     "reserve_id": ""
-   },
-   {
-    "horario": "22:00",
-    "reservado": false,
-    "cancha": 2,
-    "reserve_id": ""
    }
   ]
  },
@@ -149,12 +137,6 @@
    },
    {
     "horario": "21:00",
-    "reservado": false,
-    "cancha": 3,
-    "reserve_id": ""
-   },
-   {
-    "horario": "22:00",
     "reservado": false,
     "cancha": 3,
     "reserve_id": ""
