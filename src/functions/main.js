@@ -40,9 +40,9 @@ module.exports = {
     getTime: () => {
 
         const date = new Date();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
+        const hours = date.getUTCHours();
+        const minutes = date.getUTCMinutes();
+        const seconds = date.getUTCSeconds();
 
         const time = `${hours}:${("0" + Math.floor(minutes)).slice(-2)}:${("0" + Math.floor(seconds)).slice(-2)}`
 
