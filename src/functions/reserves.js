@@ -31,8 +31,8 @@ module.exports = {
         const horariosOnDB = CanchaYhorarioData[0].options.map( option => { return option.horario}); // Array de horarios.
 
         const response = [];
-        const time = parseInt(mainfunctions.getTime().slice(0,3));
-        const timeToReserve = parseInt(body.horario.slice(0,3))
+        const time = parseInt(mainfunctions.getTime().slice(0,3)) - 3; // Resto 3 para que coincida la hora local.
+        const timeToReserve = parseInt(body.horario.slice(0,3));
 
         console.log("Hora actual: ",time + " hs",", Hora reservada: ",timeToReserve + " hs")
 
