@@ -34,6 +34,8 @@ module.exports = {
         const time = parseInt(mainfunctions.getTime().slice(0,3));
         const timeToReserve = parseInt(body.horario.slice(0,3))
 
+        console.log("Hora actual: ",time + " hs",", Hora reservada: ",timeToReserve + " hs")
+
         if(time >= timeToReserve){
             response.push({error: true, message: "Es muy tarde para reservar ese horario.!"})
         } else {
