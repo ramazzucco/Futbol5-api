@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? `${process.env.URL_API_DEV}/api` : `${process.env.URL_API_PROD}/api`;
+const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? `${process.env.URL_API_DEV}` : `${process.env.URL_API_PROD}`;
 
 const pathpage = path.join(__dirname,"../database/dataproject.json");
 const pathCanchaYhorario = path.join(__dirname,"../database/canchayhorario.json");
@@ -209,8 +209,10 @@ module.exports = {
                         pageData.page.section.home.sponsors.map( (sponsor, i) => {
 
                             if(image.fieldname === sponsor.name){
-                                const url = URL_API.replace("/api","/images/" + image.filename);
-
+                                const url = URL_API + "/images/" + image.filename;
+                                console.log("URL de la nueva imagen de auspiciante: ",url)
+                                console.log("url a eliminar: ",path.join(__dirname,"../../public/images/" + sponsor.image))
+                                fs.unlinkSync(path.join(__dirname,"../../public/images/" + sponsor.image));
                                 pageData.page.section.home.sponsors[i].image = image.filename;
                                 pageData.page.section.home.sponsors[i].url = url;
                             }
