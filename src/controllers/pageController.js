@@ -120,18 +120,27 @@ module.exports = {
             status: "",
             data: {}
         }
-        const dataSaved = functions.modifySection(req.body);
+console.log("page controller: ",req.files)
+        const files = req.file ? req.file : req.files;
+        const dataSaved = functions.modifySection(req.body, files);
 
         if(dataSaved){
-            response.status = 200;
-            response.data = dataSaved;
-        } else {
-            response.error = true;
-            response.status = 404;
-            response.data = {
-                error: true,
-                message: "Data could not be saved, please check your conection to ethernet!"
+
+            if(dataSaved.length >= 2){
+                response.error = true;
+                response.status = 300;
+                response.data.error = dataSaved[0];
+                response.data.data = dataSaved[1];
+            } else {
+                response.status = 200;
+                response.data = dataSaved;
             }
+        } else {
+            res.send("Data could not be saved, please check your conection to ethernet!")
+            // response.data = {
+            //     error: true,
+            //     message: "Data could not be saved, please check your conection to ethernet!"
+            // }
         }
 
         res.json({

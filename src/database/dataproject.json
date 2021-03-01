@@ -80,32 +80,36 @@
   },
   "section": {
    "home": {
-    "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Obcaecati voluptate dolorem, omnis amet doloremque suscipit a distinctio odit delectus laboriosam accusamus facilis?Voluptatem magni commodi sed, est facere perferendis quam quaerat suscipit vero voluptatum repudiandae, dolore aperiam praesentium temporibus ducimus maiores voluptatibus? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora.",
+    "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Obcaecati voluptate dolorem, omnis amet doloremque suscipit a distinctio odit delectus laboriosam accusamus facilis?Voluptatem magni commodi sed, est facere perferendis quam quaerat suscipit vero voluptatum repudiandae, dolore aperiam praesentium temporibus ducimus maiores voluptatibus? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi.",
     "sponsors": [
      {
-      "name": "auspiciante 1",
+      "id": 1,
+      "name": "auspiciante_1",
       "image": "sin_imagen.jpg",
       "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
      },
      {
-      "name": "auspiciante 2",
+      "id": 2,
+      "name": "auspiciante_2",
       "image": "sin_imagen.jpg",
       "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
      },
      {
-      "name": "auspiciante 3",
+      "id": 3,
+      "name": "auspiciante_3",
       "image": "sin_imagen.jpg",
       "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
      },
      {
-      "name": "auspiciante 4",
+      "id": 4,
+      "name": "auspiciante_4",
       "image": "sin_imagen.jpg",
       "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
      }
     ]
    },
    "instalaciones": {
-    "canchas": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado.",
+    "canchas": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado, y cuentan con medidas profesionales.",
     "vesturarios": "Contamos con vesturarios con duchas individuales, sector para cambiarse y mas.\nLos mismos estan adaptados a los protocolos COVID-19.",
     "parrillasybar": "Contamos con un sector de parrillas y mesas para disfrutar de un buen asado despues del partido. Ademas tambien tenemos un bar con buffet para poder picar y beber algo con amigos.\nContamos con una gran variedad de opciones de buffet!"
    },

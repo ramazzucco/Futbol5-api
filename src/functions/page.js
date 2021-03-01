@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? `${process.env.URL_API_DEV}/api` : `${process.env.URL_API_PROD}/api`;
 
 const pathpage = path.join(__dirname,"../database/dataproject.json");
 const pathCanchaYhorario = path.join(__dirname,"../database/canchayhorario.json");
@@ -191,16 +192,33 @@ module.exports = {
         return response[0];
     },
 
-    modifySection: (data) => {
+    modifySection: (data, files) => {
         const dataPageJSON = fs.readFileSync(pathpage, {encoding: "utf-8"});
         const pageData = JSON.parse(dataPageJSON);
 
         const response = [];
-console.log(data)
+
         switch (data.section) {
             case "home":
                 if(data.text){
                     pageData.page.section.home.text = data.text
+                }
+
+                if(files && !files[0].error){
+                    files.map( image => {
+                        pageData.page.section.home.sponsors.map( (sponsor, i) => {
+
+                            if(image.fieldname === sponsor.name){
+                                const url = URL_API.replace("/api","/images/" + image.filename);
+
+                                pageData.page.section.home.sponsors[i].image = image.filename;
+                                pageData.page.section.home.sponsors[i].url = url;
+                            }
+
+                        })
+                    })
+                } else {
+                    response.push(files)
                 }
 
                 fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
@@ -284,7 +302,7 @@ console.log(data)
                 break;
         }
 
-        return response[0];
+        return response.length >= 2 ? response : response[0];
     },
 
     modifyFooter: (data) => {
