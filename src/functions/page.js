@@ -209,7 +209,7 @@ module.exports = {
                                 const urlbase = path.join(__dirname,"../../");
                                 const urlImage = urlbase.startsWith("D:")
                                     ? "http://localhost:3000/images/" + image.filename
-                                    : path.join(__dirname,"../../images/" + image.filename);
+                                    : "https://api-futbol5.herokuapp.com/images/" + image.filename
                                 console.log("URL de la nueva imagen de auspiciante: ",urlImage)
                                 console.log("url a eliminar: ",path.join(__dirname,"../../public/images/" + sponsor.image))
                                 if(sponsor.image != ""){
