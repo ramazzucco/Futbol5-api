@@ -85,26 +85,26 @@
      {
       "id": 1,
       "name": "auspiciante_1",
-      "image": "sin_imagen.jpg",
-      "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
+      "image": "",
+      "url": ""
      },
      {
       "id": 2,
       "name": "auspiciante_2",
-      "image": "sin_imagen.jpg",
-      "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
+      "image": "",
+      "url": ""
      },
      {
       "id": 3,
       "name": "auspiciante_3",
-      "image": "sin_imagen.jpg",
-      "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
+      "image": "",
+      "url": ""
      },
      {
       "id": 4,
       "name": "auspiciante_4",
-      "image": "sin_imagen.jpg",
-      "url": "https://api-futbol5.herokuapp.com/images/sin_imagen.jpg"
+      "image": "",
+      "url": ""
      }
     ]
    },

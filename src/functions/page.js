@@ -205,17 +205,18 @@ module.exports = {
                 if(files && !files[0].error){
                     files.map( image => {
                         pageData.page.section.home.sponsors.map( (sponsor, i) => {
-                            const urlApi = process.env.USERDOMAIN === 'DESKTOP-O3O462B'
-                                ? `${process.env.URL_API_DEV}`
-                                : `${process.env.URL_API_PROD}`
-                                console.log(process.env.USERDOMAIN)
                             if(image.fieldname === sponsor.name){
-                                const url = urlApi + "/images/" + image.filename;
-                                console.log("URL de la nueva imagen de auspiciante: ",url)
+                                const urlbase = path.join(__dirname,"../../");
+                                const urlImage = urlbase.startsWith("D:")
+                                    ? "http://localhost:3000/images/" + image.filename
+                                    : path.join(__dirname,"../../images/" + image.filename);
+                                console.log("URL de la nueva imagen de auspiciante: ",urlImage)
                                 console.log("url a eliminar: ",path.join(__dirname,"../../public/images/" + sponsor.image))
-                                fs.unlinkSync(path.join(__dirname,"../../public/images/" + sponsor.image));
+                                if(sponsor.image != ""){
+                                    fs.unlinkSync(path.join(__dirname,"../../public/images/" + sponsor.image));
+                                }
                                 pageData.page.section.home.sponsors[i].image = image.filename;
-                                pageData.page.section.home.sponsors[i].url = url;
+                                pageData.page.section.home.sponsors[i].url = urlImage;
                             }
 
                         })
