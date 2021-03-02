@@ -205,9 +205,10 @@ module.exports = {
                 if(files && !files[0].error){
                     files.map( image => {
                         pageData.page.section.home.sponsors.map( (sponsor, i) => {
-                            const urlApi = process.env.USERDOMAIN ===  'DESKTOP-O3O462B'
+                            const urlApi = process.env.USERDOMAIN === 'DESKTOP-O3O462B'
                                 ? `${process.env.URL_API_DEV}`
                                 : `${process.env.URL_API_PROD}`
+                                console.log(process.env.USERDOMAIN)
                             if(image.fieldname === sponsor.name){
                                 const url = urlApi + "/images/" + image.filename;
                                 console.log("URL de la nueva imagen de auspiciante: ",url)
