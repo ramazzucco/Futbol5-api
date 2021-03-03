@@ -38,13 +38,17 @@ body {
 }
 
 .page {
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 120px;
 }
 
-/* footer {
-  position: relative;
-} */
+#cumpleaños p, #escuelita p, #instalaciones .textContent {
+	overflow: auto;
+}
+
+#cumpleaños .imagesHome, #escuelita .imagesHome, #instalaciones .imagesHome {
+  float: left;
+}
 
 .social-networks {
   justify-content: center;

@@ -32,7 +32,14 @@
             Nuestras Instalaciones
         </h1>
         <div class="row content">
-            <div class="col-12 col-lg-4 px-5">
+            <div class="col-12 px-5 textContent">
+                <div class="imagesHome col-md-8 col-lg-8 p-0">
+                    <% if(dataPage.section.instalaciones.images.length) { %>
+                        <% for(image of dataPage.section.instalaciones.images) { %>
+                            <img class="col-md-5 col-lg-3 p-0" src="/images/instalaciones/<%= image.name %>" alt="<%= image.name %> ">
+                        <% } %>
+                    <% } %>
+                </div>
                 <div class="Canchas">
                     <h5 class="text-info">Canchas</h5>
                     <p><%= dataPage.section.instalaciones.canchas %> </p>
@@ -46,13 +53,6 @@
                     <p><%= dataPage.section.instalaciones.parrillasybar %> </p>
                 </div>
             </div>
-            <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-around">
-                <% if(dataPage.section.instalaciones.images.length) { %>
-                    <% for(image of dataPage.section.instalaciones.images) { %>
-                        <img class="col-md-6 col-lg-4" src="/images/instalaciones/<%= image.name %>" alt="<%= image.name %> ">
-                    <% } %>
-                <% } %>
-            </div>
         </div>
     </div>
 
@@ -61,15 +61,17 @@
             Festeja tu cumpleaños con nosotros
         </h1>
         <div class="row content">
-            <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-around">
-                <% if(dataPage.section.imagesCumpleaños.length) { %>
-                    <% for(image of dataPage.section.imagesCumpleaños) { %>
-                        <img class="col-md-6 col-lg-4" src="/images/cumpleanos/<%= image.name %>" alt="<%= image.name %> ">
-                    <% } %>
-                <% } %>
-            </div>
-            <div class="images-header col-12 col-lg-4 px-5">
-                <p><%= dataPage.section.cumpleaños %> </p>
+            <div class="images-header col-12 px-5">
+                <p>
+                    <div class="imagesHome col-md-8 col-lg-8 p-0">
+                        <% if(dataPage.section.imagesCumpleaños.length) { %>
+                            <% for(image of dataPage.section.imagesCumpleaños) { %>
+                                <img class="col-md-5 col-lg-3 p-0" src="/images/cumpleanos/<%= image.name %>" alt="<%= image.name %> ">
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <%= dataPage.section.cumpleaños %>
+                </p>
             </div>
         </div>
     </div>
@@ -79,17 +81,17 @@
             Escuelita de Futbol Infantil
         </h1>
         <div class="row content">
-            <div class="images-header col-12 col-lg-4 px-5">
-            <p>
-                <%= dataPage.section.escuelita %>
-            </p>
-            </div>
-            <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-between">
-                <% if(dataPage.section.imagesEscuelita.length) { %>
-                    <% for(image of dataPage.section.imagesEscuelita) { %>
-                        <img class="col-md-6 col-lg-4" src="/images/escuelita/<%= image.name %>" alt="<%= image.name %> ">
-                    <% } %>
-                <% } %>
+            <div class="images-header col-12 px-5">
+                <p>
+                    <div class="imagesHome col-md-8 col-lg-8 p-0">
+                        <% if(dataPage.section.imagesEscuelita.length) { %>
+                            <% for(image of dataPage.section.imagesEscuelita) { %>
+                                <img class="col-md-5 col-lg-3 p-0" src="/images/escuelita/<%= image.name %>" alt="<%= image.name %> ">
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <%= dataPage.section.escuelita %>
+                </p>
             </div>
         </div>
     </div>
