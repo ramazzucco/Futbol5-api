@@ -47,11 +47,11 @@
                 </div>
             </div>
             <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-around">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
+                <% if(dataPage.section.instalaciones.images.length) { %>
+                    <% for(image of dataPage.section.instalaciones.images) { %>
+                        <img class="col-md-6 col-lg-4" src="/images/instalaciones/<%= image.name %>" alt="<%= image.name %> ">
+                    <% } %>
+                <% } %>
             </div>
         </div>
     </div>
@@ -62,10 +62,11 @@
         </h1>
         <div class="row content">
             <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-around">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
+                <% if(dataPage.section.imagesCumpleaños.length) { %>
+                    <% for(image of dataPage.section.imagesCumpleaños) { %>
+                        <img class="col-md-6 col-lg-4" src="/images/cumpleanos/<%= image.name %>" alt="<%= image.name %> ">
+                    <% } %>
+                <% } %>
             </div>
             <div class="images-header col-12 col-lg-4 px-5">
                 <p><%= dataPage.section.cumpleaños %> </p>
@@ -84,10 +85,11 @@
             </p>
             </div>
             <div class="imagesHome col-lg-8 d-flex flex-wrap justify-content-between">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
-                <img class="col-md-6 col-lg-4" src="/images/sin_imagen.jpg" alt="">
+                <% if(dataPage.section.imagesEscuelita.length) { %>
+                    <% for(image of dataPage.section.imagesEscuelita) { %>
+                        <img class="col-md-6 col-lg-4" src="/images/escuelita/<%= image.name %>" alt="<%= image.name %> ">
+                    <% } %>
+                <% } %>
             </div>
         </div>
     </div>
