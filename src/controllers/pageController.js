@@ -120,7 +120,9 @@ module.exports = {
             status: "",
             data: {}
         }
-console.log("page controller: ",req.files)
+
+        console.log("page controller: ",req.files)
+
         const files = req.file ? req.file : req.files;
         const dataSaved = functions.modifySection(req.body, files);
 

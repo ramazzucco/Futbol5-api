@@ -222,7 +222,9 @@ module.exports = {
                         })
                     })
                 } else {
-                    response.push(files)
+                    if(files){
+                        response.push(files)
+                    }
                 }
 
                 fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));
@@ -316,13 +318,19 @@ module.exports = {
         const response = [];
 
         if(data.section == "redes sociales"){
-            data.redessociales.map( (redes, i) => {
-                pageData.page.footer.redessociales.map( redesDB => {
-                    if(redes.titulo == redesDB.nombre){
-                        pageData.page.footer.redessociales[i].nombre = redes.titulo;
-                        pageData.page.footer.redessociales[i].url = redes.url;
+
+            pageData.page.footer.redessociales.map( (redes,i) => {
+
+                Object.keys(data).map( (key,index) => {
+                    if(redes.id == key){
+                        const nombre = Object.values(data)[index].titulo;
+                        const url = Object.values(data)[index].url;
+
+                        pageData.page.footer.redessociales[i].nombre = nombre;
+                        pageData.page.footer.redessociales[i].url = url;
                     }
                 })
+
             })
 
             fs.writeFileSync(pathpage,JSON.stringify(pageData,null," "));

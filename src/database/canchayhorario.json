@@ -113,9 +113,9 @@
    },
    {
     "horario": "17:00",
-    "reservado": false,
+    "reservado": true,
     "cancha": 3,
-    "reserve_id": ""
+    "reserve_id": 128
    },
    {
     "horario": "18:00",

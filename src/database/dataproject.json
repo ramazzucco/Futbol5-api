@@ -1,258 +1,261 @@
 {
-    "reservas": {
-        "total": 126
+ "reservas": {
+  "total": 128
+ },
+ "canchas": {
+  "cantidad": 3,
+  "model": {
+   "number": 4,
+   "status": "incomplete",
+   "options": [
+    {
+     "horario": "15:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
     },
-    "canchas": {
-        "cantidad": 3,
-        "model": {
-            "number": 4,
-            "status": "incomplete",
-            "options": [
-                {
-                    "horario": "15:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "16:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "17:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "18:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "19:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "20:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                },
-                {
-                    "horario": "21:00",
-                    "reservado": false,
-                    "cancha": 4,
-                    "reserve_id": ""
-                }
-            ]
-        }
+    {
+     "horario": "16:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
     },
-    "horarios": [
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00"
-    ],
-    "horarios_model": {
-        "horario": "00:00",
-        "reservado": false,
-        "cancha": "",
-        "reserve_id": ""
+    {
+     "horario": "17:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
     },
-    "page": {
-        "header": {
-            "links": [
-                "home",
-                "instalaciones",
-                "cumpleaños",
-                "escuelita",
-                "promociones"
-            ]
-        },
-        "section": {
-            "home": {
-                "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Obcaecati voluptate dolorem, omnis amet doloremque suscipit a distinctio odit delectus laboriosam accusamus facilis?Voluptatem magni commodi sed, est facere perferendis quam quaerat suscipit vero voluptatum repudiandae, dolore aperiam praesentium temporibus ducimus maiores voluptatibus? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi.",
-                "sponsors": [
-                    {
-                        "id": 1,
-                        "name": "auspiciante_1",
-                        "image": "",
-                        "url": ""
-                    },
-                    {
-                        "id": 2,
-                        "name": "auspiciante_2",
-                        "image": "",
-                        "url": ""
-                    },
-                    {
-                        "id": 3,
-                        "name": "auspiciante_3",
-                        "image": "",
-                        "url": ""
-                    },
-                    {
-                        "id": 4,
-                        "name": "auspiciante_4",
-                        "image": "",
-                        "url": ""
-                    }
-                ]
-            },
-            "instalaciones": {
-                "canchas": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado, y cuentan con medidas profesionales.",
-                "vesturarios": "Contamos con vesturarios con duchas individuales, sector para cambiarse y mas.\nLos mismos estan adaptados a los protocolos COVID-19.",
-                "parrillasybar": "Contamos con un sector de parrillas y mesas para disfrutar de un buen asado despues del partido. Ademas tambien tenemos un bar con buffet para poder picar y beber algo con amigos.\nContamos con una gran variedad de opciones de buffet!",
-                "images": [
-                    {
-                        "id": 1,
-                        "name": "sin_imagen.jpg",
-                        "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                    },
-                    {
-                        "id": 2,
-                        "name": "sin_imagen.jpg",
-                        "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                    },
-                    {
-                        "id": 3,
-                        "name": "sin_imagen.jpg",
-                        "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                    },
-                    {
-                        "id": 4,
-                        "name": "sin_imagen.jpg",
-                        "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                    },
-                    {
-                        "id": 5,
-                        "name": "sin_imagen.jpg",
-                        "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                    }
-                ]
-            },
-            "cumpleaños": "Contamos con una gran experiencia y trayectoria en organizar cumpleaños deportivos infantiles tanto para niños como cumpleaños mixtos. Llevamos más de 80 cumpleaños realizados!! Los cumpleaños en (MARCA) se caracterizan por brindarle a nuestros clientes , la exclusividad total del predio durante el evento, esto quiere decir que solo el cumpleañero y sus invitados podrán usar las instalaciones.A la hora de elegir el tipo de evento a organizar, las opciones son muy variadas , dependiendo si el cumpleaños es mixto o solo para varones. Contamos con animadoras para niñas, referees, profes y muchas actividades que contemplan la integración de todos. El Pack básico del cumpleaños incluye 2 hs de cancha de futbol, snack y bebidas libres y 2 panchos por chico, sin embargo disponemos varias alternativas que podrían incluir desde panchos, hamburguesas, pizzas etc . El cumpleaños se organiza y arma a la medida de quien lo lleve a cabo, con al menos 2 personas enfocadas en servir, asistir y mantener limpio el lugar.\nSomos la mejor opcion para festejar tu cumpleaños.",
-            "imagesCumpleaños": [
-                {
-                    "id": 1,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 4,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 5,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                }
-            ],
-            "escuelita": "La escuela de fútbol es un proyecto formativo desarrollado bajo el paraguas del complejo (MARCA). Nació para ofrecer a niños y niñas su primer contacto con el fútbol de una manera lúdica, utilizando el fútbol como medio de formación, en un clima que garantice un entorno favorable para potenciar valores como la amistad, el respeto, la unidad, la solidaridad, la superación, la disciplina y todos los méritos necesarios para el desarrollo de este deporte.",
-            "imagesEscuelita": [
-                {
-                    "id": 1,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 4,
-                    "name": "sin_imagen.jpg",
-                    "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
-                },
-                {
-                    "id": 5,
-                    "name": "sin_imagen.jpg",
-                    "url": "http://localhost:3000/images/sin_imagen.jpg"
-                }
-            ],
-            "promociones": {
-                "model": {
-                    "numero": "",
-                    "titulo": "",
-                    "descripcion": ""
-                },
-                "datos": [
-                    {
-                        "numero": "1",
-                        "titulo": "Promo Champion",
-                        "descripcion": "Todo el mes 10% de descuento en la hora , los fines de semana."
-                    },
-                    {
-                        "numero": "2",
-                        "titulo": "Promo y media!",
-                        "descripcion": "50% de descuento en el buffet los dias Lunes, miercoles y viernes!\nNo te lo podes perder."
-                    }
-                ]
-            }
-        },
-        "footer": {
-            "campos": [
-                "redes sociales",
-                "contacto"
-            ],
-            "redessociales": [
-                {
-                    "nombre": "facebook",
-                    "url": "www.facebook.com/tumarca"
-                },
-                {
-                    "nombre": "twitter",
-                    "url": "www.twitter.com"
-                },
-                {
-                    "nombre": "instagram",
-                    "url": "www.instagram.com"
-                }
-            ],
-            "contacto": [
-                {
-                    "title": "direccion",
-                    "data": "Calle Falsa 1234"
-                },
-                {
-                    "title": "telefono",
-                    "data": "4-123456"
-                },
-                {
-                    "title": "whatsapp",
-                    "data": "3415-12345667"
-                },
-                {
-                    "title": "email",
-                    "data": "tumarca@hotmail.com.ar"
-                }
-            ]
-        }
+    {
+     "horario": "18:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
+    },
+    {
+     "horario": "19:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
+    },
+    {
+     "horario": "20:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
+    },
+    {
+     "horario": "21:00",
+     "reservado": false,
+     "cancha": 4,
+     "reserve_id": ""
     }
+   ]
+  }
+ },
+ "horarios": [
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00"
+ ],
+ "horarios_model": {
+  "horario": "00:00",
+  "reservado": false,
+  "cancha": "",
+  "reserve_id": ""
+ },
+ "page": {
+  "header": {
+   "links": [
+    "home",
+    "instalaciones",
+    "cumpleaños",
+    "escuelita",
+    "promociones"
+   ]
+  },
+  "section": {
+   "home": {
+    "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Obcaecati voluptate dolorem, omnis amet doloremque suscipit a distinctio odit delectus laboriosam accusamus facilis?Voluptatem magni commodi sed, est facere perferendis quam quaerat suscipit vero voluptatum repudiandae, dolore aperiam praesentium temporibus ducimus maiores voluptatibus? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi.",
+    "sponsors": [
+     {
+      "id": 1,
+      "name": "auspiciante_1",
+      "image": "",
+      "url": ""
+     },
+     {
+      "id": 2,
+      "name": "auspiciante_2",
+      "image": "",
+      "url": ""
+     },
+     {
+      "id": 3,
+      "name": "auspiciante_3",
+      "image": "",
+      "url": ""
+     },
+     {
+      "id": 4,
+      "name": "auspiciante_4",
+      "image": "",
+      "url": ""
+     }
+    ]
+   },
+   "instalaciones": {
+    "canchas": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado, y cuentan con medidas profesionales.",
+    "vesturarios": "Contamos con vesturarios con duchas individuales, sector para cambiarse y mas.\nLos mismos estan adaptados a los protocolos COVID-19.",
+    "parrillasybar": "Contamos con un sector de parrillas y mesas para disfrutar de un buen asado despues del partido. Ademas tambien tenemos un bar con buffet para poder picar y beber algo con amigos.",
+    "images": [
+     {
+      "id": 1,
+      "name": "sin_imagen.jpg",
+      "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+     },
+     {
+      "id": 2,
+      "name": "sin_imagen.jpg",
+      "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+     },
+     {
+      "id": 3,
+      "name": "sin_imagen.jpg",
+      "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+     },
+     {
+      "id": 4,
+      "name": "sin_imagen.jpg",
+      "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+     },
+     {
+      "id": 5,
+      "name": "sin_imagen.jpg",
+      "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+     }
+    ]
+   },
+   "cumpleaños": "Contamos con una gran experiencia y trayectoria en organizar cumpleaños deportivos infantiles tanto para niños como cumpleaños mixtos. Llevamos más de 80 cumpleaños realizados!! Los cumpleaños en (MARCA) se caracterizan por brindarle a nuestros clientes , la exclusividad total del predio durante el evento, esto quiere decir que solo el cumpleañero y sus invitados podrán usar las instalaciones.A la hora de elegir el tipo de evento a organizar, las opciones son muy variadas , dependiendo si el cumpleaños es mixto o solo para varones. Contamos con animadoras para niñas, referees, profes y muchas actividades que contemplan la integración de todos. El Pack básico del cumpleaños incluye 2 hs de cancha de futbol, snack y bebidas libres y 2 panchos por chico, sin embargo disponemos varias alternativas que podrían incluir desde panchos, hamburguesas, pizzas etc . El cumpleaños se organiza y arma a la medida de quien lo lleve a cabo, con al menos 2 personas enfocadas en servir, asistir y mantener limpio el lugar.\nVeni a disfrutar tu cumple con nosotros!",
+   "imagesCumpleaños": [
+    {
+     "id": 1,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 2,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 3,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 4,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 5,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    }
+   ],
+   "escuelita": "La escuela de fútbol es un proyecto formativo desarrollado bajo el paraguas del complejo (TU MARCA AQUI). Nació para ofrecer a niños y niñas su primer contacto con el fútbol de una manera lúdica, utilizando el fútbol como medio de formación, en un clima que garantice un entorno favorable para potenciar valores como la amistad, el respeto, la unidad, la solidaridad, la superación, la disciplina y todos los méritos necesarios para el desarrollo de este deporte.\nVeni a entrenar y divertirte con los mejores profes.",
+   "imagesEscuelita": [
+    {
+     "id": 1,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 2,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 3,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 4,
+     "name": "sin_imagen.jpg",
+     "url": "https://futbol5-app.herokuapp.com/images/sin_imagen.jpg"
+    },
+    {
+     "id": 5,
+     "name": "sin_imagen.jpg",
+     "url": "http://localhost:3000/images/sin_imagen.jpg"
+    }
+   ],
+   "promociones": {
+    "model": {
+     "numero": "",
+     "titulo": "",
+     "descripcion": ""
+    },
+    "datos": [
+     {
+      "numero": "1",
+      "titulo": "Promo Champion",
+      "descripcion": "Todo el mes 10% de descuento en la hora , los fines de semana."
+     },
+     {
+      "numero": "2",
+      "titulo": "Promo y media!",
+      "descripcion": "50% de descuento en el buffet los dias Lunes, miercoles y viernes!\nNo te lo podes perder."
+     }
+    ]
+   }
+  },
+  "footer": {
+   "campos": [
+    "redes sociales",
+    "contacto"
+   ],
+   "redessociales": [
+    {
+     "id": "redes1",
+     "nombre": "facebook",
+     "url": "www.facebook.com/tumarca"
+    },
+    {
+     "id": "redes2",
+     "url": "www.twitter.com/tumarca",
+     "nombre": "twitter"
+    },
+    {
+     "id": "redes3",
+     "url": "www.instagram.com/tumarca",
+     "nombre": "instagram"
+    }
+   ],
+   "contacto": [
+    {
+     "title": "direccion",
+     "data": "Calle Falsa 123"
+    },
+    {
+     "title": "telefono",
+     "data": "4-333456"
+    },
+    {
+     "title": "whatsapp",
+     "data": "3415-12345666"
+    },
+    {
+     "title": "email",
+     "data": "tumarca@hotmail.com.ar"
+    }
+   ]
+  }
+ }
 }
