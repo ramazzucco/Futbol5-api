@@ -1,8 +1,3 @@
 node_modules/
 package-lock.json
 .env
-canchayhorario.json
-dataproject.json
-reserves.json
-sessions.json
-users.json
