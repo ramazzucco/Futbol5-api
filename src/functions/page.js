@@ -210,11 +210,14 @@ module.exports = {
                                 const urlImage = urlbase.startsWith("D:")
                                     ? "http://localhost:3000/images/" + image.filename
                                     : "https://api-futbol5.herokuapp.com/images/" + image.filename
+
                                 console.log("URL de la nueva imagen de auspiciante: ",urlImage)
                                 console.log("url a eliminar: ",path.join(__dirname,"../../public/images/" + sponsor.image))
+
                                 if(sponsor.image != ""){
                                     fs.unlinkSync(path.join(__dirname,"../../public/images/" + sponsor.image));
                                 }
+
                                 pageData.page.section.home.sponsors[i].image = image.filename;
                                 pageData.page.section.home.sponsors[i].url = urlImage;
                             }
@@ -316,9 +319,9 @@ module.exports = {
         const pageData = JSON.parse(dataPageJSON);
 
         const response = [];
+        console.log(data)
 
         if(data.section == "redes sociales"){
-
             pageData.page.footer.redessociales.map( (redes,i) => {
 
                 Object.keys(data).map( (key,index) => {

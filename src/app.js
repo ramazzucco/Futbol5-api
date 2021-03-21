@@ -1,4 +1,3 @@
-require('newrelic');
 const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
@@ -31,7 +30,7 @@ app.use(methodOverride('_method'));
 
 // PAGE Route.
 app.use('/', indexRouter);
-
+console.log(URL_API)
 //CORS.
 app.use(cors())
 app.get(URL_API, function (req, res, next) {
