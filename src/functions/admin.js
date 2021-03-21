@@ -102,7 +102,7 @@ module.exports = {
                 data: {
                     error: true,
                     field: "password",
-                    message: "Wrong Password!",
+                    message: "User dosn´t exist!",
                 }
             };
 
@@ -141,7 +141,7 @@ module.exports = {
 
             sessionsData.map( user => {
 
-                if(bcrypt.compareSync(key, user.token)){
+                if(bcrypt.compareSync(key, user.key)){
                     response.error = false;
                     response.data = user;
                 }

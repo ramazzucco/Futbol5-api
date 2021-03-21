@@ -53,7 +53,6 @@ module.exports = {
     },
 
     login: (req, res) => {
-console.log(req.body)
         const password = req.body.password;
         const response = {
             status: "",
@@ -66,6 +65,7 @@ console.log(req.body)
             const findSession = functions.getSession();
 
             console.log(findSession)
+
             findSession.error
                 ? response.status = 300
                 : response.status = 200;
@@ -74,7 +74,7 @@ console.log(req.body)
 
         } else {
             const user = functions.getUser(password);
-
+console.log("------->",user)
             if(!user.error){
 
                 functions.setSession(user.data);
