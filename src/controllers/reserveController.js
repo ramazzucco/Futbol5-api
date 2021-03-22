@@ -69,7 +69,7 @@ module.exports = {
     getCanchaYhorario: (req, res) => {
 
         const canchayhorario = functions.getCanchayhorario();
-console.log(canchayhorario)
+
         res.json({
             meta: {
                 status: 200
