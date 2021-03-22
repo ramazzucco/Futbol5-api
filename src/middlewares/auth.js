@@ -4,7 +4,7 @@ const urlBaseApi =
         ? process.env.URL_API_DEV
         : process.env.URL_API_PROD;
 
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
     const user = req.body.user ? req.body.user : req.body;
 
     const auth = bcrypt.compareSync(`${process.env.MY_PASS}`,user.key)
