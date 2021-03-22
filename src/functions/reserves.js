@@ -85,10 +85,10 @@ module.exports = {
         return ReservesData;
     },
 
-    getCanchayhorario: async (cancha, horario) => {
+    getCanchayhorario: (cancha, horario) => {
 
         const dataCanchaYhorarioJSON = fs.readFileSync(pathCanchaYhorario, {encoding: "utf-8"});
-        const CanchaYhorarioData = await JSON.parse(dataCanchaYhorarioJSON);
+        const CanchaYhorarioData = JSON.parse(dataCanchaYhorarioJSON);
         const response = [];
 
         if(cancha && horario){
@@ -115,10 +115,10 @@ module.exports = {
         return reserve;
     },
 
-    getReservesOfTheDay: async () => {
+    getReservesOfTheDay: () => {
 
         const dataReservesJSON = fs.readFileSync(pathReserves, {encoding: "utf-8"});
-        const ReservesData = await JSON.parse(dataReservesJSON);
+        const ReservesData = JSON.parse(dataReservesJSON);
         const response = [];
 
         const date = mainfunctions.getDate();
