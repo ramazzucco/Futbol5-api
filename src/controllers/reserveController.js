@@ -68,11 +68,7 @@ module.exports = {
 
     getCanchaYhorario: (req, res) => {
 
-        console.log("DESDE RESERVE CONTROLLLERS: ",req.body)
-
         const canchayhorario = functions.getCanchayhorario();
-
-        console.log("canchayhorario: ", canchayhorario)
 
         res.json({
             meta: {
