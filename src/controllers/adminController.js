@@ -53,53 +53,65 @@ module.exports = {
     },
 
     login: (req, res) => {
-        const password = req.body.password;
-        const response = {
-            status: "",
-            error: false,
-            data: {}
-        }
 
-        if(password == ""){
+        const user = functions.getUser(req.body.password);
 
-            const findSession = functions.getSession();
-
-            console.log(findSession)
-
-            findSession.error
-                ? response.status = 300
-                : response.status = 200;
-
-            response.data = findSession.data
-
+        if(user.error){
+            res.json({
+                meta: {
+                    status: 400,
+                },
+                error: true,
+                data: user.data
+            });
         } else {
-            const user = functions.getUser(password);
-console.log("------->",user)
-            if(!user.error){
-
-                functions.setSession(user.data);
-
-                response.status = 200;
-                response.error = false;
-                response.data = user.data;
-
-            } else {
-
-                response.status = 300;
-                response.error = true;
-                response.data = user.data
-            }
-
+            res.json({
+                meta: {
+                    status: 200,
+                },
+                error: false,
+                data: user.data,
+            });
         }
+        // const password = req.body.password;
+        // const response = {
+        //     status: "",
+        //     error: false,
+        //     data: {}
+        // }
 
+        // if(password == ""){
 
-        res.json({
-            meta: {
-                status: response.status,
-            },
-            error: response.error,
-            data: response.data,
-        });
+        //     // const findSession = functions.getSession();
+
+        //     console.log(findSession)
+
+        //     findSession.error
+        //         ? response.status = 300
+        //         : response.status = 200;
+
+        //     response.data = findSession.data
+
+        // } else {
+        //     const user = functions.getUser(password);
+
+        //     if(!user.error){
+
+        //         functions.setSession(user.data);
+
+        //         response.status = 200;
+        //         response.error = false;
+        //         response.data = user.data;
+
+        //     } else {
+
+        //         response.status = 300;
+        //         response.error = true;
+        //         response.data = user.data
+        //     }
+
+        // }
+
     },
 
     updatePassword: (req, res) => {

@@ -85,7 +85,6 @@ module.exports = {
 
                     response.error = true;
                     response.data = {
-                        error: true,
                         field: "password",
                         message: "Wrong Password!",
                     };
@@ -97,13 +96,8 @@ module.exports = {
 
             response.error = true;
             response.data = {
-                error: true,
-                users: false,
-                data: {
-                    error: true,
-                    field: "password",
-                    message: "User dosn´t exist!",
-                }
+                field: "password",
+                message: "User dosn´t exist!",
             };
 
         }
@@ -111,56 +105,56 @@ module.exports = {
         return response;
     },
 
-    setSession: (user) => {
-        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-        const sessionsData = JSON.parse(sessionsDataJSON);
+    // setSession: (user) => {
+    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+    //     const sessionsData = JSON.parse(sessionsDataJSON);
 
-        const findSession = sessionsData.find(session => session.password == user.password);
+    //     const findSession = sessionsData.find(session => session.password == user.password);
 
-        if(findSession){
-            console.log("Ya existe la session")
-        } else {
-            user.session = true;
-            sessionsData.push(user);
-        }
+    //     if(findSession){
+    //         console.log("Ya existe la session")
+    //     } else {
+    //         user.session = true;
+    //         sessionsData.push(user);
+    //     }
 
-        fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
+    //     fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
 
-    },
+    // },
 
-    getSession: () => {
-        const key = `${process.env.MY_PASS}`;
-        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-        const sessionsData = JSON.parse(sessionsDataJSON);
-        const response = {
-            error:"",
-            data: {}
-        };
+    // getSession: () => {
+    //     const key = `${process.env.MY_PASS}`;
+    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+    //     const sessionsData = JSON.parse(sessionsDataJSON);
+    //     const response = {
+    //         error:"",
+    //         data: {}
+    //     };
 
-        if(sessionsData.length != 0){
+    //     if(sessionsData.length != 0){
 
-            sessionsData.map( user => {
+    //         sessionsData.map( user => {
 
-                if(bcrypt.compareSync(key, user.key)){
-                    response.error = false;
-                    response.data = user;
-                }
+    //             if(bcrypt.compareSync(key, user.key)){
+    //                 response.error = false;
+    //                 response.data = user;
+    //             }
 
-            });
+    //         });
 
-        } else {
-            response.error = true;
-            response.data = {error: true, message: "No sessions!"};
-        }
+    //     } else {
+    //         response.error = true;
+    //         response.data = {error: true, message: "No sessions!"};
+    //     }
 
-        return response;
-    },
+    //     return response;
+    // },
 
-    closeSession: (user) => {
-        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-        const sessionsData = JSON.parse(sessionsDataJSON);
-        const sessionDeleted = sessionsData.filter(session => session.password != user.password);
+    // closeSession: (user) => {
+    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
+    //     const sessionsData = JSON.parse(sessionsDataJSON);
+    //     const sessionDeleted = sessionsData.filter(session => session.password != user.password);
 
-        fs.writeFileSync(sessionsPath, JSON.stringify(sessionDeleted,null," "))
-    }
+    //     fs.writeFileSync(sessionsPath, JSON.stringify(sessionDeleted,null," "))
+    // }
 };
