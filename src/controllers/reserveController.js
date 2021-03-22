@@ -70,6 +70,8 @@ module.exports = {
 
         const canchayhorario = functions.getCanchayhorario();
 
+        console.log("canchayhorario: ", canchayhorario)
+
         res.json({
             meta: {
                 status: 200
