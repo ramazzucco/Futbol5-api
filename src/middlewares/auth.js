@@ -6,7 +6,7 @@ const urlBaseApi =
 
 module.exports = (req, res, next) => {
     const user = req.body.user ? req.body.user : req.body;
-    const auth = bcrypt.compareSync(`${process.env.MY_PASS}`,user.key)
+    const auth = bcrypt.compareSync(`${process.env.MY_PASS}`,user.token)
 
     auth ? next() : res.redirect(`${urlBaseApi}`);
 };
