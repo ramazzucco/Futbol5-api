@@ -53,25 +53,44 @@ module.exports = {
     },
 
     login: (req, res) => {
-
-        const user = functions.getUser(req.body.password);
-
-        if(user.error){
-            res.json({
-                meta: {
-                    status: 400,
-                },
-                error: true,
-                data: user.data
-            });
+        if(req.body.session){
+            if(bcrypt.compareSync(key,req.body.token)){
+                res.json({
+                    meta: {
+                        status: 200
+                    },
+                    error: false,
+                    data: req.body
+                })
+            } else {
+                res.json({
+                    meta: {
+                        status: 200
+                    },
+                    error: true,
+                    data: {}
+                })
+            }
         } else {
-            res.json({
-                meta: {
-                    status: 200,
-                },
-                error: false,
-                data: user.data,
-            });
+            const user = functions.getUser(req.body.password);
+
+            if(user.error){
+                res.json({
+                    meta: {
+                        status: 400,
+                    },
+                    error: true,
+                    data: user.data
+                });
+            } else {
+                res.json({
+                    meta: {
+                        status: 200,
+                    },
+                    error: false,
+                    data: user.data,
+                });
+            }
         }
         // const password = req.body.password;
         // const response = {

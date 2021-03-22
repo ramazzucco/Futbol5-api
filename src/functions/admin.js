@@ -65,7 +65,7 @@ module.exports = {
 
                 if(bcrypt.compareSync(pass, user.password)) {
 
-                    user.status == "admin" ? user.token = token : ""
+                    user.token = token;
                     response.error = false;
                     response.data = user;
 
