@@ -11,7 +11,7 @@ function hasNumber(variable){
 
 module.exports = (req, res, next) =>  {
     const error = [];
-    const myKey = process.env.MY_PASS;
+    const myKey = `${process.env.MY_PASS}`;
 
     // -----------Validacion del campo nombre.
     req.body.name == "" ? error.push({ field: "name", message: "Campo obligatorio." }) : "";

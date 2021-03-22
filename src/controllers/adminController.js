@@ -161,15 +161,13 @@ module.exports = {
         });
     },
 
-    logout: (req, res) => {
+    // logout: (req, res) => {
 
-        functions.closeSession(req.body);
-
-        res.json({
-            meta:{
-                status: 200,
-                message: "Session close!"
-            }
-        });
-    },
+    //     res.json({
+    //         meta:{
+    //             status: 200,
+    //             message: "Session close!"
+    //         }
+    //     });
+    // },
 };
