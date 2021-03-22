@@ -1,20 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 const usersPath = path.join(__dirname, "../database/users.json");
-const sessionsPath = path.join(__dirname, "../database/sessions.json");
 
 const bcrypt = require("bcrypt");
-const { response } = require("express");
-
-const developer = process.env.MY_PASS;
 
 module.exports = {
 
     create: (user) => {
         const usersDataJSON = fs.readFileSync(usersPath, { encoding: "utf-8" });
         const usersData = JSON.parse(usersDataJSON);
-        const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-        const sessionsData = JSON.parse(sessionsDataJSON);
 
         const response = [];
 
@@ -33,12 +27,6 @@ module.exports = {
             usersData.push(user);
 
             fs.writeFileSync(usersPath,JSON.stringify(usersData,null," "));
-
-            user.session = true;
-            user.token = token;
-            sessionsData.push(user)
-
-            fs.writeFileSync(sessionsPath,JSON.stringify(sessionsData,null," "));
 
             response.push(user);
 
@@ -105,56 +93,4 @@ module.exports = {
         return response;
     },
 
-    // setSession: (user) => {
-    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-    //     const sessionsData = JSON.parse(sessionsDataJSON);
-
-    //     const findSession = sessionsData.find(session => session.password == user.password);
-
-    //     if(findSession){
-    //         console.log("Ya existe la session")
-    //     } else {
-    //         user.session = true;
-    //         sessionsData.push(user);
-    //     }
-
-    //     fs.writeFileSync(sessionsPath, JSON.stringify(sessionsData,null," "));
-
-    // },
-
-    // getSession: () => {
-    //     const key = `${process.env.MY_PASS}`;
-    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-    //     const sessionsData = JSON.parse(sessionsDataJSON);
-    //     const response = {
-    //         error:"",
-    //         data: {}
-    //     };
-
-    //     if(sessionsData.length != 0){
-
-    //         sessionsData.map( user => {
-
-    //             if(bcrypt.compareSync(key, user.key)){
-    //                 response.error = false;
-    //                 response.data = user;
-    //             }
-
-    //         });
-
-    //     } else {
-    //         response.error = true;
-    //         response.data = {error: true, message: "No sessions!"};
-    //     }
-
-    //     return response;
-    // },
-
-    // closeSession: (user) => {
-    //     const sessionsDataJSON = fs.readFileSync(sessionsPath, { encoding: "utf-8" });
-    //     const sessionsData = JSON.parse(sessionsDataJSON);
-    //     const sessionDeleted = sessionsData.filter(session => session.password != user.password);
-
-    //     fs.writeFileSync(sessionsPath, JSON.stringify(sessionDeleted,null," "))
-    // }
 };
