@@ -19,7 +19,7 @@
                 <% for(sponsor of dataPage.section.home.sponsors) { %>
                 <div class="<%= sponsor.name %>  col-12 col-md-6 col-lg-3 mb-5">
                     <h6 class="text-center text-uppercase text-info"><%= sponsor.name.replace("_"," ") %></h6>
-                    <img class="img-fluid shadow-lg" src="/images/<%= sponsor.image %>" alt=<%= sponsor.name %> >
+                    <img class="img-fluid shadow-lg" src="<%= sponsor.url %>" alt=<%= sponsor.name %> >
                 </div>
                 <% } %>
             </div>
