@@ -67,7 +67,7 @@ module.exports = {
                 meta: {
                     status: 200
                 },
-                error: error,
+                error: error.error,
                 data: data[0]
             })
         }
