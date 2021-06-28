@@ -155,7 +155,8 @@ module.exports = {
 
         const logout = admin.logout(req.body);
 
-        if(!logout.error){
+        console.log(logout)
+        if(logout && !logout.error){
 
             if(logout.sessions === 0){
                 const resetreserves = reserve.reset();
