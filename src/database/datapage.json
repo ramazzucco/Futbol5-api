@@ -1,0 +1,206 @@
+{
+    "page": {
+        "header": {
+            "logo": {
+                "url": "http://localhost:3000/images/logo.jpg"
+            },
+            "links": [
+                "home",
+                "instalaciones",
+                "cumpleaños",
+                "escuelita",
+                "promociones"
+            ]
+        },
+        "section": {
+            "titles": [
+                "home",
+                "facilities",
+                "birthdays",
+                "school",
+                "promotions"
+            ],
+            "home": {
+                "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. \nLorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam neque eaque natus, molestias animi sunt voluptate. Dolore accusamus maiores, dolorem alias optio quos fuga quo ipsa, aut dicta recusandae tempore!ehenderit, velit et numquam a mollitia suscipit quos distinctio exercitationem unde debitis accusamus sequi, eius tempora. Lorem",
+                "sponsors": [
+                    {
+                        "id": 1,
+                        "name": "auspiciante_1",
+                        "image": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "name": "auspiciante_2",
+                        "image": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 3,
+                        "name": "auspiciante_3",
+                        "image": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 4,
+                        "name": "auspiciante_4",
+                        "image": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    }
+                ]
+            },
+            "facilities": {
+                "fields": "Nuestras canchas de futbol estan equipadas con el mejor cesped sintetico del mercado, y cuentan ademas con medidas profesionales dispuestas por la AFA.",
+                "changingrooms": "Contamos con vesturarios con duchas individuales, sector para cambiarse y mas.\nLos mismos estan adaptados a los protocolos COVID-19.",
+                "grillsandbar": "Contamos con un sector de parrillas y mesas para disfrutar de un buen asado despues del partido. Ademas tambien tenemos un bar con buffet para poder picar y beber algo con amigos.",
+                "images": [
+                    {
+                        "id": 1,
+                        "name": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "name": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 3,
+                        "name": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 4,
+                        "name": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    },
+                    {
+                        "id": 5,
+                        "name": "sin_imagen.jpg",
+                        "url": "http://localhost:3000/images/sin_imagen.jpg"
+                    }
+                ]
+            },
+            "birthdays": "Contamos con una gran experiencia y trayectoria en organizar cumpleaños deportivos infantiles tanto para niños como cumpleaños mixtos. Llevamos más de 80 cumpleaños realizados!! Los cumpleaños en (MARCA) se caracterizan por brindarle a nuestros clientes , la exclusividad total del predio durante el evento, esto quiere decir que solo el cumpleañero y sus invitados podrán usar las instalaciones.A la hora de elegir el tipo de evento a organizar, las opciones son muy variadas , dependiendo si el cumpleaños es mixto o solo para varones. Contamos con animadoras para niñas, referees, profes y muchas actividades que contemplan la integración de todos. El Pack básico del cumpleaños incluye 2 hs de cancha de futbol, snack y bebidas libres y 2 panchos por chico, sin embargo disponemos varias alternativas que podrían incluir desde panchos, hamburguesas, pizzas etc . El cumpleaños se organiza y arma a la medida de quien lo lleve a cabo, con al menos 2 personas enfocadas en servir, asistir y mantener limpio el lugar.\nVeni a disfrutar tu cumple con nosotros, no te lo podes perder!",
+            "birthdaysImage": [
+                {
+                    "id": 1,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 2,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 3,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 4,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 5,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                }
+            ],
+            "school": "La escuela de fútbol es un proyecto formativo desarrollado bajo el paraguas del complejo (TU MARCA AQUI). Nació para ofrecer a niños y niñas su primer contacto con el fútbol de una manera lúdica, utilizando el fútbol como medio de formación, en un clima que garantice un entorno favorable para potenciar valores como la amistad, el respeto, la unidad, la solidaridad, la superación, la disciplina y todos los méritos necesarios para el desarrollo de este deporte.\nVeni a entrenar y divertirte con los mejores profes de rosario.",
+            "schoolImage": [
+                {
+                    "id": 1,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 2,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 3,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 4,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                },
+                {
+                    "id": 5,
+                    "name": "sin_imagen.jpg",
+                    "url": "http://localhost:3000/images/sin_imagen.jpg"
+                }
+            ],
+            "promotions": {
+                "model": {
+                    "id": "",
+                    "title": "",
+                    "description": ""
+                },
+                "data": [
+                    {
+                        "id": 1,
+                        "title": "Promo Champions",
+                        "description": "Todo el mes 10% de descuento en la hora , los fines de semana unicamente."
+                    },
+                    {
+                        "id": 2,
+                        "title": "Promo y media!",
+                        "description": "50% de descuento en el buffet los dias Lunes, miercoles y viernes!\nNo te lo podes perder."
+                    }
+                ]
+            }
+        },
+        "footer": {
+            "titles": [
+                "social networks",
+                "contact"
+            ],
+            "socialnetworks": [
+                {
+                    "id": 1,
+                    "name": "facebook",
+                    "url": "www.facebook.com/tumarca_33"
+                },
+                {
+                    "id": 2,
+                    "name": "twitter",
+                    "url": "www.twitter.com/tumarca"
+                },
+                {
+                    "id": 3,
+                    "name": "instagram",
+                    "url": "www.instagram.com/tumarca_OK"
+                }
+            ],
+            "contact": [
+                {
+                    "id": 1,
+                    "title": "address",
+                    "data": "Calle Falsa 123"
+                },
+                {
+                    "id": 2,
+                    "title": "phone",
+                    "data": "4-336699"
+                },
+                {
+                    "id": 3,
+                    "title": "whatsapp",
+                    "data": "3415-853666"
+                },
+                {
+                    "id": 4,
+                    "title": "email",
+                    "data": "tumarca@hotmail.com.ar"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+ "users": [
+  {
+   "id": 1,
+   "name": "ramazzucco",
+   "password": "$2b$10$wttZzp9MM6o3mJpbDEPvn.nRApQL4c5vmYOHcJdRfBBQOpIS.CpnG"
+  }
+ ],
+ "tokens": []
+}

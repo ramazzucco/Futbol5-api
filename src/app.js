@@ -1,49 +1,44 @@
 const createError = require('http-errors');
 const express = require('express');
-const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const methodOverride =  require('method-override');
+const cors = require('cors');
 require("dotenv").config();
 
-const URL_API = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? `${process.env.URL_API_DEV}/api` : `${process.env.URL_API_PROD}/api`;
-const PORT_CORS = process.env.USERDOMAIN == 'DESKTOP-O3O462B' ? process.env.PORT_CORS_DEV : process.env.PORT_CORS_PROD;
-
-const indexRouter = require("./routes/index");
-const apiRouterAdmin = require("./routes/api/admin");
-const apiRouterReserves = require("./routes/api/reserves");
-const apiRouterPage = require("./routes/api/page");
+const pageRoute = require('./routes/page');
+const accessRoute = require('./routes/access');
+const reservesRoute = require('./routes/reserves');
 
 const app = express();
+
+const url = app.get('env') === 'development' ? `${process.env.URL_API_DEV}` : `${process.env.URL_API_PROD}`;
+const port_cors = app.get('env') === 'development' ? `${process.env.PORT_CORS_DEV}` : `${process.env.PORT_CORS_PROD}`;
 
 // view engine setup
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json({limit: "10mb"}));
-app.use(express.urlencoded({ limit: "10mb", extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(methodOverride('_method'));
 
-// PAGE Route.
-app.use('/', indexRouter);
-console.log(URL_API)
-//CORS.
 app.use(cors())
-app.get(URL_API, function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})
-app.listen(PORT_CORS, function () {
-  console.log(`CORS-enabled web server listening on port ${PORT_CORS}`)
+app.get(url, function (req, res, next) {
+  res.json({msg: `{This is CORS-enabled for ${url}!}`})
 })
 
-//API Routes.
-app.use('/api/admin', apiRouterAdmin);
-app.use('/api/reserves', apiRouterReserves);
-app.use("/api/page", apiRouterPage)
+app.listen(port_cors, function () {
+  console.log(`CORS-enabled web server listening on port ${port_cors}`)
+})
+// Page Route.
+app.use('/page' , pageRoute);
+
+// API routes.
+app.use('/access' , accessRoute);
+app.use('/reserves' , reservesRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

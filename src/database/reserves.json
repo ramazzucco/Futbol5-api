@@ -1,322 +1,256 @@
 [
  {
-  "id": 87,
-  "cancha": 2,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
+  "number": 1,
+  "status": "incomplete",
+  "total": 6,
+  "options": [
+   {
+    "shedule": "15:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "16:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "17:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "18:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "19:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "20:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "21:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "22:00",
+    "reserved": false,
+    "field": 1,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   }
+  ]
  },
  {
-  "id": 88,
-  "cancha": 3,
-  "horario": "17:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
+  "number": 2,
+  "status": "incomplete",
+  "total": 7,
+  "options": [
+   {
+    "shedule": "15:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "16:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "17:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "18:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "19:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "20:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "21:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   },
+   {
+    "shedule": "22:00",
+    "reserved": false,
+    "field": 2,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": ""
+   }
+  ]
  },
  {
-  "id": 89,
-  "cancha": 2,
-  "horario": "18:00",
-  "name": "Homero",
-  "lastname": "Simpson",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 90,
-  "cancha": 1,
-  "horario": "18:00",
-  "name": "Homero",
-  "lastname": "Simpson",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 91,
-  "cancha": 3,
-  "horario": "19:00",
-  "name": "Lio",
-  "lastname": "Messi",
-  "email": "liomessi@gmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 93,
-  "cancha": 4,
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 94,
-  "cancha": 2,
-  "horario": "19:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 95,
-  "cancha": 3,
-  "horario": "15:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 96,
-  "cancha": 2,
-  "horario": "20:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 97,
-  "cancha": 4,
-  "horario": "15:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "15-1-2021"
- },
- {
-  "id": 99,
-  "cancha": 2,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "16-1-2021"
- },
- {
-  "id": 100,
-  "cancha": 3,
-  "horario": "17:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "16-1-2021"
- },
- {
-  "id": 101,
-  "cancha": 2,
-  "horario": "17:00",
-  "name": "Homero",
-  "lastname": "Simpson",
-  "email": "homero@simpson.com",
-  "telefono": "123132123",
-  "date": "16-1-2021"
- },
- {
-  "id": 102,
-  "cancha": 1,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "16-1-2021"
- },
- {
-  "id": 103,
-  "cancha": 2,
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "16-1-2021"
- },
- {
-  "id": 104,
-  "cancha": 2,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "21-1-2021"
- },
- {
-  "id": 105,
-  "cancha": 2,
-  "horario": "16:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "22-1-2021"
- },
- {
-  "id": 106,
-  "cancha": 1,
-  "horario": "19:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "22-1-2021"
- },
- {
-  "id": 107,
-  "cancha": "2",
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "23-1-2021"
- },
- {
-  "id": 108,
-  "cancha": "2",
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "23-1-2021"
- },
- {
-  "id": 110,
-  "cancha": 1,
-  "horario": "15:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "23-1-2021"
- },
- {
-  "id": 111,
-  "cancha": 3,
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "23-1-2021"
- },
- {
-  "id": 112,
-  "cancha": 3,
-  "horario": "19:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "23-1-2021"
- },
- {
-  "id": 117,
-  "cancha": 2,
-  "horario": "22:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "18-2-2021"
- },
- {
-  "id": 118,
-  "cancha": 3,
-  "horario": "20:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "18-2-2021"
- },
- {
-  "id": 119,
-  "cancha": 1,
-  "horario": "19:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "18-2-2021"
- },
- {
-  "id": 120,
-  "cancha": 1,
-  "horario": "21:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "18-2-2021"
- },
- {
-  "id": 121,
-  "cancha": 1,
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "22-2-2021"
- },
- {
-  "id": 122,
-  "cancha": 1,
-  "horario": "17:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "22-2-2021"
- },
- {
-  "id": 126,
-  "cancha": 2,
-  "horario": "18:00",
-  "name": "Diego",
-  "lastname": "Maradona",
-  "email": "diego@gmail.com",
-  "telefono": "123132123",
-  "date": "22-2-2021"
- },
- {
-  "id": 127,
-  "cancha": 2,
-  "horario": "17:00",
-  "name": "Ramiro",
-  "lastname": "Maradona",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "9-3-2021"
- },
- {
-  "id": 128,
-  "cancha": 3,
-  "horario": "17:00",
-  "name": "Ramiro",
-  "lastname": "Mazzucco",
-  "email": "rama@hotmail.com",
-  "telefono": "123132123",
-  "date": "10-3-2021"
+  "number": 3,
+  "status": "incomplete",
+  "total": 6,
+  "options": [
+   {
+    "shedule": "15:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "16:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "17:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "18:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "19:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "20:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "21:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   },
+   {
+    "shedule": "22:00",
+    "reserved": false,
+    "field": 3,
+    "reserve_id": "",
+    "name": "",
+    "phone": "",
+    "time": "",
+    "incomming": false
+   }
+  ]
  }
 ]

@@ -1,12 +1,28 @@
-const bcrypt = require("bcrypt");
-const urlBaseApi =
-    process.env.USERDOMAIN == "DESKTOP-O3O462B"
-        ? process.env.URL_API_DEV
-        : process.env.URL_API_PROD;
+const fs = require("fs");
+const path = require("path");
+const bcrypt = require('bcrypt');
+const access_controller = require("../controllers/access_controller");
+const pathdatadmin = path.join(__dirname,"../database/admins.json");
 
-module.exports = (req, res, next) => {
-    const user = req.body.user ? req.body.user : req.body;
-    const auth = bcrypt.compareSync(`${process.env.MY_PASS}`,user.token)
+module.exports = async (req,res, next) => {
 
-    auth ? next() : res.redirect(`${urlBaseApi}`);
-};
+    const admins = JSON.parse(fs.readFileSync(pathdatadmin, { encoding: 'utf-8' }));
+
+    admins.tokens.map( token => {
+
+        if(token.name === req.body.name && bcrypt.compareSync(token.token, req.body.token)){
+            next();
+        }else{
+            return res.json({
+                met: {
+                    status: 422
+                },
+                error: true,
+                session: false,
+                message: 'CSRF Token missing or expired'
+            })
+        }
+
+    })
+
+}
