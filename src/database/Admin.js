@@ -83,7 +83,7 @@ class Admin {
         const admintodeletetoken = this.find(admin.name);
         let sessionsbefore;
 
-        this.admins.tokens.map( async token => {
+        const closesession = this.admins.tokens.map( async token => {
             if(token.name === admin.name && bcrypt.compareSync(token.token, admin.token)){
 
                 if(token.name === admin.name && token.sessions >= 1){
@@ -104,20 +104,23 @@ class Admin {
                     fs.writeFileSync(pathdatadmin,JSON.stringify(adminlogout,null,' '));
                 }
             }
+            return true;
         });
 
         let logout;
 
-        this.admins.tokens.map( user => {
-            console.log("logout: ",user)
-            if(user){
-                user.name === admin.name && user.sessions < sessionsbefore || user.sessions === 0
-                    ? logout = { error: false, sessions: user.sessions }
-                    : logout = { error: true };
-            }else{
-                logout = { error: true }
-            }
-        });
+        if(closesession){
+            this.admins.tokens.map( user => {
+                console.log("logout: ",user)
+                if(user){
+                    user.name === admin.name && user.sessions < sessionsbefore || user.sessions === 0
+                        ? logout = { error: false, sessions: user.sessions }
+                        : logout = { error: true };
+                }else{
+                    logout = { error: false, sessions: user.sessions }
+                }
+            });
+        }
 
         console.log('ADMINS: ',this.admins)
         return logout;
