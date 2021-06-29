@@ -4,6 +4,11 @@
    "id": 1,
    "name": "ramazzucco",
    "password": "$2b$10$wttZzp9MM6o3mJpbDEPvn.nRApQL4c5vmYOHcJdRfBBQOpIS.CpnG"
+  },
+  {
+   "id": 2,
+   "name": "usuarioinvitado",
+   "password": "$2b$10$K0P7slE.RAyAt1FzcbjMkunBGa9CAhSR8uANhdy1oONU5FPKv8idS"
   }
  ],
  "tokens": []

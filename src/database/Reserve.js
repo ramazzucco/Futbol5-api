@@ -40,7 +40,7 @@ class Reserve {
 
         let response;
         const date = new Date();
-        const hours = date.getHours();
+        const hours = date.getUTCHours();
         const sheduletoreserve = parseInt(newreserve.shedule.slice(0,3));
 
         console.log(hours,' - ',sheduletoreserve)
@@ -51,9 +51,9 @@ class Reserve {
             }
         }else{
             const idnewreserve = this.history[this.history.length - 1].id + 1;
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const seconds = date.getSeconds();
+            const hours = date.getUTCHours();
+            const minutes = date.getUTCMinutes();
+            const seconds = date.getUTCSeconds();
 
             const time = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}`: seconds}`;
 

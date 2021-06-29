@@ -8,21 +8,19 @@ module.exports = async (req,res, next) => {
 
     const admins = JSON.parse(fs.readFileSync(pathdatadmin, { encoding: 'utf-8' }));
 
-    admins.tokens.map( token => {
+    const userfind = admins.tokens.find( token => token.name === req.body.name );
 
-        if(token.name === req.body.name && bcrypt.compareSync(token.token, req.body.token)){
-            next();
-        }else{
-            return res.json({
-                met: {
-                    status: 422
-                },
-                error: true,
-                session: false,
-                message: 'CSRF Token missing or expired'
-            })
-        }
-
-    })
+    if(userfind && bcrypt.compareSync(userfind.token, req.body.token)){
+        next();
+    }else{
+        res.json({
+            meta: {
+                status: 422
+            },
+            error: true,
+            session: false,
+            message: 'CSRF Token missing or expired'
+        })
+    }
 
 }

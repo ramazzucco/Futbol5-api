@@ -13,6 +13,27 @@ const reserve = new Reserve();
 
 module.exports = {
 
+    admins: (req, res) => {
+        const admins =  admin.admins;
+
+        if(admins){
+            return res.json({
+                meta: {
+                    status: 200
+                },
+                data: admins
+            })
+        }else{
+            return res.json({
+                meta: {
+                    status: 400
+                },
+                error: true,
+                message: 'No se ha encontrado la informacion'
+            })
+        }
+    },
+
     register: (req, res) => {
         const errors = validationResult(req).errors;
 
@@ -46,8 +67,8 @@ module.exports = {
                     },
                     error: true,
                     data: [{
-                        field: 'modal',
-                        message: 'Error de servidor, lo sentimos, intentelo mas tarde!'
+                        param: 'key',
+                        msg: 'Error de servidor, lo sentimos, intentelo mas tarde!'
                     }]
                 })
             }
@@ -128,8 +149,10 @@ module.exports = {
 
     session: (req, res) => {
 
+        console.log('session: ', req.body)
         const getadmin = admin.find(req.body.name);
 
+        console.log('getadmin: ',getadmin)
         if(getadmin){
 
             return res.json({

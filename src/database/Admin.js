@@ -10,6 +10,26 @@ class Admin {
        this.admins = JSON.parse(fs.readFileSync(pathdatadmin, { encoding: 'utf-8' }));
     }
 
+    sortAdmin(a,b) {
+        if (a.id > b.id) {
+            return 1;
+        }
+        if (a.id < b.id) {
+            return -1;
+        }
+        return 0;
+    }
+
+    sortToken(a,b) {
+        if (a.name > b.name) {
+            return 1;
+        }
+        if (a.name < b.name) {
+            return -1;
+        }
+        return 0;
+    }
+
     wasCreated(object) {
         const findAdmin = this.admins.users.find( admin => admin.id === object.id);
 
@@ -33,11 +53,15 @@ class Admin {
 
         const newtoken = {
             name: admin.name,
-            token: token
+            token: token,
+            sessions: 1
         }
 
         this.admins.users.push(newadmin);
         this.admins.tokens.push(newtoken);
+
+        this.admins.users.sort((a, b) => this.sortAdmin(a, b));
+        this.admins.tokens.sort((a, b) => this.sortToken(a, b));
 
         fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
 
@@ -56,7 +80,7 @@ class Admin {
             findadmin.token = tokenhashed;
 
             const adminlogged = {
-                users: [...this.admins.users.filter( user => user.name !== admin.name), findadmin],
+                users: [...this.admins.users.filter( user => user.name !== admin.name), findadmin].sort((a, b) => this.sortAdmin(a, b)),
                 tokens: [...this.admins.tokens, { name: admin.name, token: token, sessions: 1}]
             }
 
@@ -100,7 +124,7 @@ class Admin {
                         delete admintodeletetoken.token;
 
                         const adminlogout = {
-                            users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken],
+                            users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken].sort((a, b) => this.sortAdmin(a, b)),
                             tokens: this.admins.tokens.filter( token => token.name !== admin.name )
                         }
 

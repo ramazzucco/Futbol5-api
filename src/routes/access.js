@@ -25,11 +25,13 @@ const registerAuth = (req, res, next) => {
     }
 }
 
+// GET admins.
+router.post('/admins', auth, indexcontroller.admins);
 
+// Access.
 router.post('/session', auth, indexcontroller.session);
 router.post('/register', registerAuth, validator.register, indexcontroller.register);
 router.post('/login', validator.login, indexcontroller.login);
 router.post('/logout', auth, indexcontroller.logout);
-
 
 module.exports = router;
