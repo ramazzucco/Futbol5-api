@@ -116,25 +116,29 @@ class Admin {
         const closesession = async () => {
             let response;
 
-            await this.admins.tokens.map( token => {
+            await this.admins.tokens.map( (token,i) => {
                 if(token.name === admin.name && bcrypt.compareSync(token.token, admin.token)){
 
-                    if(token.name === admin.name && token.sessions >= 1){
+                    if(token.sessions >= 1){
                         sessionsbefore = token.sessions;
                         token.sessions--
 
                         fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
                     }
 
-                    if(token.name === admin.name && token.sessions === 0){
-                        delete admintodeletetoken.token;
+                    if(token.sessions === 0){
 
-                        const adminlogout = {
-                            users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken].sort((a, b) => this.sortAdmin(a, b)),
-                            tokens: this.admins.tokens.filter( token => token.name !== admin.name )
-                        }
+                        this.admins.users.map( user => {
+                            if(user.name === admin.name) user.token = '';
+                        })
 
-                        fs.writeFileSync(pathdatadmin,JSON.stringify(adminlogout,null,' '));
+                        this.admins.tokens = this.admins.tokens.filter( token => token.name !== admin.name);
+                        // const adminlogout = {
+                        //     users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken].sort((a, b) => this.sortAdmin(a, b)),
+                        //     tokens: this.admins.tokens.filter( token => token.name !== admin.name )
+                        // }
+
+                        fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
                     }
                 }
 
