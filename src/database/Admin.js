@@ -109,6 +109,7 @@ class Admin {
         let logout;
 
         this.admins.tokens.map( user => {
+            console.log("logout: ",user)
             if(user){
                 user.name === admin.name && user.sessions < sessionsbefore || user.sessions === 0
                     ? logout = { error: false, sessions: user.sessions }
