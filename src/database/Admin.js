@@ -69,7 +69,6 @@ class Admin {
     }
 
     login(admin) {
-        const findadmin = this.find(admin.name);
         const findtoken = this.admins.tokens.find( token => token.name === admin.name);
 
         // Si es la primera vez que inicia sesion, creo el token, sino, agrego un numero de sesion al token.
@@ -77,14 +76,21 @@ class Admin {
             const token = uuid();
             const tokenhashed = bcrypt.hashSync(token, 10);
 
-            findadmin.token = tokenhashed;
+            // admin.token = tokenhashed;
 
-            const adminlogged = {
-                users: [...this.admins.users.filter( user => user.name !== admin.name), findadmin].sort((a, b) => this.sortAdmin(a, b)),
-                tokens: [...this.admins.tokens, { name: admin.name, token: token, sessions: 1}]
-            }
+            this.admins.users.map( user => {
+                if(user.name === admin.name){
+                    user.token = tokenhashed;
+                }
+            });
 
-            fs.writeFileSync(pathdatadmin,JSON.stringify(adminlogged,null,' '));
+            this.admins.tokens.push({ name: admin.name, token: token, sessions: 1})
+            // const adminlogged = {
+            //     users: [...this.admins.users.filter( user => user.name !== admin.name), admin].sort((a, b) => this.sortAdmin(a, b)),
+            //     tokens: [...this.admins.tokens, { name: admin.name, token: token, sessions: 1}]
+            // }
+
+            fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
         }else{
             this.admins.tokens.map( token => {
                 if(token.name === admin.name){
@@ -95,7 +101,7 @@ class Admin {
             fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
         }
 
-        return this.find(admin.name);
+        return admin;
     }
 
     // update(array) {
