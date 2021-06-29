@@ -151,11 +151,12 @@ module.exports = {
         }
     },
 
-    logout: (req, res) => {
+    logout: async (req, res) => {
 
-        const logout = admin.logout(req.body);
+        const logout = await admin.logout(req.body);
 
-        console.log(logout)
+        console.log('logout: ',logout)
+
         if(logout && !logout.error){
 
             if(logout.sessions === 0){

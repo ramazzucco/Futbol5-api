@@ -78,51 +78,56 @@ class Admin {
 
     // }
 
-    logout(admin) {
+    async logout(admin) {
 
         const admintodeletetoken = this.find(admin.name);
         let sessionsbefore;
 
-        const closesession = this.admins.tokens.map( async token => {
-            if(token.name === admin.name && bcrypt.compareSync(token.token, admin.token)){
+        const closesession = async () => {
+            let response;
 
-                if(token.name === admin.name && token.sessions >= 1){
-                    sessionsbefore = token.sessions;
-                    token.sessions--
+            await this.admins.tokens.map( token => {
+                if(token.name === admin.name && bcrypt.compareSync(token.token, admin.token)){
 
-                    fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
-                }
+                    if(token.name === admin.name && token.sessions >= 1){
+                        sessionsbefore = token.sessions;
+                        token.sessions--
 
-                if(token.name === admin.name && token.sessions === 0){
-                    delete admintodeletetoken.token;
-
-                    const adminlogout = {
-                        users: [... await this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken],
-                        tokens: await this.admins.tokens.filter( token => token.name !== admin.name )
+                        fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
                     }
 
-                    fs.writeFileSync(pathdatadmin,JSON.stringify(adminlogout,null,' '));
+                    if(token.name === admin.name && token.sessions === 0){
+                        delete admintodeletetoken.token;
+
+                        const adminlogout = {
+                            users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken],
+                            tokens: this.admins.tokens.filter( token => token.name !== admin.name )
+                        }
+
+                        fs.writeFileSync(pathdatadmin,JSON.stringify(adminlogout,null,' '));
+                    }
                 }
-            }
-            return true;
-        });
+
+                return response = this.admins.tokens.find( user => user.name === admin.name);
+            });
+
+            return response;
+        }
+
+        const getclosesession = await closesession();
+
+        console.log('getclosesession: ',getclosesession)
 
         let logout;
 
-        if(closesession){
-            this.admins.tokens.map( user => {
-                console.log("logout: ",user)
-                if(user){
-                    user.name === admin.name && user.sessions < sessionsbefore || user.sessions === 0
-                        ? logout = { error: false, sessions: user.sessions }
-                        : logout = { error: true };
-                }else{
-                    logout = { error: false, sessions: user.sessions }
-                }
-            });
+        if(getclosesession && getclosesession.sessions === sessionsbefore){
+            logout = { error: true }
+        }else if(getclosesession && getclosesession.sessions < sessionsbefore){
+            logout = { error: false, sessions: getclosesession.sessions }
+        }else if(!getclosesession){
+            logout = { error: false }
         }
 
-        console.log('ADMINS: ',this.admins)
         return logout;
     }
 }
