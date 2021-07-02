@@ -247,6 +247,32 @@ class Reserve {
 
         return this.reserves;
     }
+
+    getCharts(){
+        const fields = {
+            labels: this.reserves.map( field => `Field ${field.number}`),
+            data: this.reserves.map( field => field.total)
+        };
+        const shedules = {
+            labels: this.reserves[0].options.map( option => `${option.shedule} hs`),
+            data: []
+        };
+
+        this.reserves[0].options.forEach( async (option, i) => {
+
+            await this.history.map( reserve => {
+                if(reserve.shedule === option.shedule){
+                    shedules.data[i]
+                        ? shedules.data[i]++
+                        : shedules.data[i] = 1;
+                }
+            })
+
+        })
+
+        return { fields, shedules };
+    }
+
 }
 
 module.exports = { Reserve };

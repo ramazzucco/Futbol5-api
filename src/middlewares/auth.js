@@ -6,7 +6,6 @@ const pathdatadmin = path.join(__dirname,"../database/admins.json");
 
 module.exports = async (req,res, next) => {
 
-    console.log('desde auth: ',req.body.name)
     const admins = JSON.parse(fs.readFileSync(pathdatadmin, { encoding: 'utf-8' }));
 
     const userfind = admins.tokens.find( token => token.name === req.body.name );

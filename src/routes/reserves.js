@@ -25,4 +25,7 @@ router.post('/fields', auth, reserves_controller.fields);
 // Modify shedules.
 router.post('/shedules', auth, reserves_controller.shedules);
 
+// GET data charts.
+router.post('/charts', auth, reserves_controller.charts);
+
 module.exports = router;

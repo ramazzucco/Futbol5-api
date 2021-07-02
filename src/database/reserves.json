@@ -2,7 +2,7 @@
  {
   "number": 1,
   "status": "incomplete",
-  "total": 6,
+  "total": 23,
   "options": [
    {
     "shedule": "15:00",
@@ -85,7 +85,7 @@
  {
   "number": 2,
   "status": "incomplete",
-  "total": 8,
+  "total": 37,
   "options": [
    {
     "shedule": "15:00",
@@ -169,7 +169,7 @@
  {
   "number": 3,
   "status": "incomplete",
-  "total": 6,
+  "total": 25,
   "options": [
    {
     "shedule": "15:00",

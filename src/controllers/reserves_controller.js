@@ -196,5 +196,17 @@ module.exports = {
                 data: shedules
             })
         }
+    },
+
+    charts: (req, res) => {
+
+        const charts = reserve.getCharts();
+
+        res.json({
+            meta: {
+                status: 200
+            },
+            data: charts
+        })
     }
 }

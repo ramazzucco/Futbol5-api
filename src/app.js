@@ -9,6 +9,7 @@ require("dotenv").config();
 const pageRoute = require('./routes/page');
 const accessRoute = require('./routes/access');
 const reservesRoute = require('./routes/reserves');
+const financeRoute = require('./routes/finance');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/page' , pageRoute);
 // API routes.
 app.use('/access' , accessRoute);
 app.use('/reserves' , reservesRoute);
+app.use('/finance' , financeRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

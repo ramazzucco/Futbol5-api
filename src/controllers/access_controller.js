@@ -149,10 +149,8 @@ module.exports = {
 
     session: (req, res) => {
 
-        console.log('session: ', req.body)
         const getadmin = admin.find(req.body.name);
 
-        console.log('getadmin: ',getadmin)
         if(getadmin){
 
             return res.json({

@@ -85,10 +85,6 @@ class Admin {
             });
 
             this.admins.tokens.push({ name: admin.name, token: token, sessions: 1})
-            // const adminlogged = {
-            //     users: [...this.admins.users.filter( user => user.name !== admin.name), admin].sort((a, b) => this.sortAdmin(a, b)),
-            //     tokens: [...this.admins.tokens, { name: admin.name, token: token, sessions: 1}]
-            // }
 
             fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
         }else{
@@ -110,7 +106,6 @@ class Admin {
 
     async logout(admin) {
 
-        const admintodeletetoken = this.find(admin.name);
         let sessionsbefore;
 
         const closesession = async () => {
@@ -133,10 +128,6 @@ class Admin {
                         })
 
                         this.admins.tokens = this.admins.tokens.filter( token => token.name !== admin.name);
-                        // const adminlogout = {
-                        //     users: [...this.admins.users.filter( user => user.name !== admin.name), admintodeletetoken].sort((a, b) => this.sortAdmin(a, b)),
-                        //     tokens: this.admins.tokens.filter( token => token.name !== admin.name )
-                        // }
 
                         fs.writeFileSync(pathdatadmin,JSON.stringify(this.admins,null,' '));
                     }

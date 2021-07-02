@@ -1,0 +1,26 @@
+{
+    "income": 0,
+    "debt": 0,
+    "taxes": [
+        {
+            "title": "luz",
+            "amount": 40000
+        },
+        {
+            "title": "gas",
+            "amount": 5000
+        },
+        {
+            "title": "api",
+            "amount": 3000
+        },
+        {
+            "title": "rental",
+            "amount": 60000
+        }
+    ],
+    "suppliers": {
+        "bebidas": [],
+        "snacks": []
+    }
+}
