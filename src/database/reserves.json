@@ -1,8 +1,8 @@
 [
  {
   "number": 1,
-  "status": "incomplete",
-  "total": 23,
+  "full": false,
+  "total": 26,
   "options": [
    {
     "shedule": "15:00",
@@ -20,7 +20,8 @@
     "reserve_id": "",
     "name": "",
     "phone": "",
-    "time": ""
+    "time": "",
+    "incomming": false
    },
    {
     "shedule": "17:00",
@@ -84,8 +85,8 @@
  },
  {
   "number": 2,
-  "status": "incomplete",
-  "total": 37,
+  "full": false,
+  "total": 39,
   "options": [
    {
     "shedule": "15:00",
@@ -94,7 +95,8 @@
     "reserve_id": "",
     "name": "",
     "phone": "",
-    "time": ""
+    "time": "",
+    "incomming": false
    },
    {
     "shedule": "16:00",
@@ -168,8 +170,8 @@
  },
  {
   "number": 3,
-  "status": "incomplete",
-  "total": 25,
+  "full": false,
+  "total": 26,
   "options": [
    {
     "shedule": "15:00",

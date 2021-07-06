@@ -50,61 +50,76 @@ class Reserve {
                 message: 'Es tarde para reservar ese horario.'
             }
         }else{
-            const idnewreserve = this.history[this.history.length - 1].id + 1;
-            const hours = date.getUTCHours();
-            const minutes = date.getUTCMinutes();
-            const seconds = date.getUTCSeconds();
 
-            const time = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}`: seconds}`;
+            const reserveoption = this.reserves[Number(newreserve.field) - 1].options.find(option => option.shedule === newreserve.shedule);
 
-            this.reserves[Number(newreserve.field) - 1].total++;
-
-            this.reserves[Number(newreserve.field) - 1].options.forEach( reserve => {
-                if(reserve.field === Number(newreserve.field) && reserve.shedule === newreserve.shedule){
-                    reserve.reserved = true;
-                    reserve.reserve_id = idnewreserve;
-                    reserve.name = `${newreserve.name} ${newreserve.lastname}`;
-                    reserve.phone = `${newreserve.phone.slice(0,3)}-${newreserve.phone.slice(3,9)}`
-                    reserve.time = time;
-                    reserve.incomming = true;
-                }
-            });
-
-            fs.writeFileSync(pathreserves,JSON.stringify(this.reserves,null,' '));
-
-            const newdate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-
-            const createreserve = {
-                id: idnewreserve,
-                field: Number(newreserve.field),
-                shedule: newreserve.shedule,
-                name: newreserve.name,
-                lastname: newreserve.lastname,
-                email: newreserve.email ? newreserve.email : '',
-                phone: `${newreserve.phone.slice(0,3)}-${newreserve.phone.slice(3,9)}`,
-                date: newdate
-            }
-
-            this.history.push(createreserve);
-
-            const shedule = this.reserves[Number(newreserve.field) - 1].options.find( option => option.shedule === newreserve.shedule);
-
-            shedule.reserved
-                ? response = {
-                    reserves: this.reserves,
-                    newreserve: newreserve
-                }
-                : response = {
+            if(reserveoption.reserved){
+                response = {
                     error: true,
-                    message: 'No se ha podido crear la reserva!'
+                    message: 'Ese horario ya se encurntra reservado.'
+                }
+            }else{
+                const idnewreserve = this.history[this.history.length - 1].id + 1;
+                const hours = date.getUTCHours();
+                const minutes = date.getUTCMinutes();
+                const seconds = date.getUTCSeconds();
+
+                const time = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}`: seconds}`;
+
+                this.reserves[Number(newreserve.field) - 1].total++;
+
+                this.reserves[Number(newreserve.field) - 1].options.forEach( reserve => {
+                    if(reserve.field === Number(newreserve.field) && reserve.shedule === newreserve.shedule && !reserve.reserved){
+                        reserve.reserved = true;
+                        reserve.reserve_id = idnewreserve;
+                        reserve.name = `${newreserve.name} ${newreserve.lastname}`;
+                        reserve.phone = `${newreserve.phone.slice(0,3)}-${newreserve.phone.slice(3,9)}`
+                        reserve.time = time;
+                        reserve.incomming = true;
+                    }
+                });
+
+                const full = this.reserves[Number(newreserve.field) - 1].options.filter( option => !option.reserved);
+
+                if(!full.length) this.reserves[Number(newreserve.field) - 1].full = true;
+
+                fs.writeFileSync(pathreserves,JSON.stringify(this.reserves,null,' '));
+
+                const newdate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+
+                const createreserve = {
+                    id: idnewreserve,
+                    field: Number(newreserve.field),
+                    shedule: newreserve.shedule,
+                    name: newreserve.name,
+                    lastname: newreserve.lastname,
+                    email: newreserve.email ? newreserve.email : '',
+                    phone: `${newreserve.phone.slice(0,3)}-${newreserve.phone.slice(3,9)}`,
+                    date: newdate
                 }
 
-            fs.writeFileSync(pathistory,JSON.stringify(this.history,null,' '));
+                this.history.push(createreserve);
 
-            return response;
+                const shedule = this.reserves[Number(newreserve.field) - 1].options.find( option => option.shedule === newreserve.shedule);
+
+                shedule.reserved
+                    ? response = {
+                        reserves: this.reserves,
+                        newreserve: newreserve
+                    }
+                    : response = {
+                        error: true,
+                        message: 'No se ha podido crear la reserva!'
+                    }
+
+                fs.writeFileSync(pathistory,JSON.stringify(this.history,null,' '));
+
+                return response;
+
+            }
         }
 
-
+        return response;
     }
 
     checked(reserve){
@@ -122,6 +137,12 @@ class Reserve {
                 reserve.reserve_id = '';
             }
         });
+
+        const full = this.reserves[Number(reservetocancel.field) - 1].options.filter( option => !option.reserved);
+
+        full.length
+            ? this.reserves[Number(reservetocancel.field) - 1].full = false
+            : this.reserves[Number(reservetocancel.field) - 1].full = true;
 
         fs.writeFileSync(pathreserves,JSON.stringify(this.reserves,null,' '));
 
@@ -155,6 +176,9 @@ class Reserve {
 
     reset(){
         this.reserves.forEach( async field => {
+
+            field.full = false;
+
             await field.options.forEach( reserve => {
                 reserve.reserved = false;
                 reserve.reserve_id = '';
@@ -179,7 +203,7 @@ class Reserve {
         Boolean(response)
             ? response = {
                 error: true,
-                message: 'No se pudieron resetear las reservas del dia.'
+                message: 'Reserves could not be reset.'
             }
             : response = this.reserves;
 
