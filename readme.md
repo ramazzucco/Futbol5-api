@@ -2,7 +2,7 @@
 
 ## Estructura
 
-![Estructura carpetas.](https://github.com/ramazzucco/Futbol5_api/edit/master/images/Estructura_carpetas.png "Estructura carpetas.")
+![Ver la estructura de carpetas.](https://github.com/ramazzucco/Futbol5_api/blob/master/public/images/Estructura_carpetas.png "Estructura carpetas.")
 
 ---
 
