@@ -1,0 +1,1 @@
+# Crear un interceptor para el timeout de los request.
