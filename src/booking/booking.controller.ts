@@ -11,12 +11,12 @@ export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   create(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingService.create(createBookingDto);
   }
 
   @Get()
-  @UseGuards(AuthGuard)
   findAll() {
     return this.bookingService.findAll();
   }
@@ -27,6 +27,7 @@ export class BookingController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
     return this.bookingService.remove(id);
   }

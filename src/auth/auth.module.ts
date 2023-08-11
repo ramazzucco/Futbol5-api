@@ -14,6 +14,11 @@ import { ValidateTokenService } from 'src/_shared/service/validate-token/validat
     MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService, GenerateTokensService, ValidateTokenService]
+  providers: [
+    AuthService,
+    UserService,
+    GenerateTokensService,
+    ValidateTokenService,
+  ],
 })
 export class AuthModule {}
